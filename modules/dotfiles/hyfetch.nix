@@ -1,0 +1,20 @@
+{ ... }:
+
+{
+  home.file."Library/Application Support/hyfetch.json" = {
+    text = builtins.toJSON {
+      preset = "nonbinary";
+      mode = "rgb";
+      auto_detect_light_dark = true;
+      light_dark = "dark";
+      lightness = 0.65;
+      color_align = {
+        mode = "horizontal";
+      };
+      backend = "neofetch";
+      args = null;
+      distro = null;
+      pride_month_disable = false;
+    };
+  };
+}
