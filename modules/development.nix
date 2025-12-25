@@ -1,14 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
-  homebrew.brews = [
-    "helix"
-    "marksman"
-  ];
-
-  homebrew.casks = [
-    "ghostty"
-    "vscodium"
-    "zed"
+  home.packages = with pkgs; [
+    helix
+    marksman
+    ghostty-bin
+    vscodium
+    zed-editor
   ];
 }

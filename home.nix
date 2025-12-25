@@ -3,13 +3,19 @@
 {
   imports = [
     ./modules/dotfiles
+    ./modules/development.nix
+    ./modules/entertainment.nix
+    ./modules/productivity.nix
+    ./modules/shell-tools.nix
   ];
+
   home.username = "meihapps";
   home.homeDirectory = "/Users/meihapps";
   home.stateVersion = "25.05";
 
   home.packages = with pkgs; [
     nil
+    nixd
   ];
 
   home.shellAliases = {

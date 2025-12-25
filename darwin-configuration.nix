@@ -2,12 +2,8 @@
 
 {
   imports = [
-    ./modules/development.nix
-    ./modules/entertainment.nix
     ./modules/languages
-    ./modules/productivity.nix
-    ./modules/shell-tools.nix
-    ./modules/web.nix
+    ./modules/homebrew.nix
   ];
 
   nix.enable = false;

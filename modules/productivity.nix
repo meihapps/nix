@@ -1,11 +1,7 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
-  homebrew.casks = [
-    "karabiner-elements"
-    "monitorcontrol"
-    "obsidian"
-    "raycast"
-    "utm"
+  home.packages = with pkgs; [
+    utm
   ];
 }
