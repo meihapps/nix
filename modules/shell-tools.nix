@@ -2,23 +2,30 @@
 
 {
   home.packages = with pkgs; [
+    # standalone tools
     atuin
     bat
     btop
     eza
-    fd
-    fzf
     git
     git-lfs
-    httpie
-    jq
+    hyfetch
     lazygit
     ncdu
-    ripgrep
     tealdeer
     tree
     wget
     hyfetch
     zoxide
+
+    # dependancies
+    fd
+    ffmpeg
+    fzf
+    httpie
+    jq
+    poppler
+    resvg
+    ripgrep
   ];
 }
