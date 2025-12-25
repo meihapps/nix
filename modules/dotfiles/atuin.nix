@@ -6,6 +6,7 @@
     settings = {
       enter_accept = true;
       cmd_only = true;
+      workspaces = true;
     };
   };
 }
