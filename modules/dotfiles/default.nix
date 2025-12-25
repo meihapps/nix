@@ -13,5 +13,6 @@
     ./karabiner.nix
     ./nvim.nix
     ./zed.nix
+    ./zoxide.nix
   ];
 }

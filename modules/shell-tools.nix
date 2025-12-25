@@ -22,6 +22,7 @@
     "hyfetch"
     "jj"
     "jjui"
+    "zoxide"
   ];
 
   homebrew.casks = [
