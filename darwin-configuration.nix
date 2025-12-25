@@ -6,7 +6,6 @@
     ./modules/entertainment.nix
     ./modules/languages
     ./modules/productivity.nix
-    ./modules/shell-ecosystem.nix
     ./modules/shell-tools.nix
     ./modules/web.nix
   ];

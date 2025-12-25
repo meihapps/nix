@@ -1,7 +1,0 @@
-{ ... }:
-
-{
-  homebrew.brews = [
-    "fisher"
-  ];
-}
