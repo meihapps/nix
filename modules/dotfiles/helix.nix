@@ -84,7 +84,7 @@
         ];
 
         G = {
-          c = "@:sh git commit -a ";
+          c = "@:sh git commit -a -m \"\"<left>";
           P = "@:sh git push <ret>";
           p = "@:sh git pull <ret>";
         };
