@@ -71,28 +71,16 @@
         };
       };
 
-      keys.normal = {
-        "C-g" = [
-          ":write-all"
-          ":new"
-          ":insert-output lazygit"
-          ":set mouse false"
-          ":set mouse true"
-          ":buffer-close!"
-          ":redraw"
-          ":reload-all"
-        ];
-        "C-j" = [
-          ":write-all"
-          ":new"
-          ":insert-output jjui >/dev/tty"
-          ":set mouse false"
-          ":set mouse true"
-          ":buffer-close!"
-          ":redraw"
-          ":reload-all"
-        ];
-      };
+      keys.normal."C-g" = [
+        ":write-all"
+        ":new"
+        ":insert-output lazygit"
+        ":set mouse false"
+        ":set mouse true"
+        ":buffer-close!"
+        ":redraw"
+        ":reload-all"
+      ];
     };
 
     languages = {
