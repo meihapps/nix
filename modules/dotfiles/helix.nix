@@ -71,16 +71,24 @@
         };
       };
 
-      keys.normal."C-g" = [
-        ":write-all"
-        ":new"
-        ":insert-output lazygit"
-        ":set mouse false"
-        ":set mouse true"
-        ":buffer-close!"
-        ":redraw"
-        ":reload-all"
-      ];
+      keys.normal = {
+        "C-g" = [
+          ":write-all"
+          ":new"
+          ":insert-output lazygit"
+          ":set mouse false"
+          ":set mouse true"
+          ":buffer-close!"
+          ":redraw"
+          ":reload-all"
+        ];
+
+        G = {
+          c = "@:sh git commit -a ";
+          P = "@:sh git push <ret>";
+          p = "@:sh git pull <ret>";
+        };
+      };
     };
 
     languages = {
