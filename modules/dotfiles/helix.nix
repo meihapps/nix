@@ -15,7 +15,6 @@
         rulers = [81 121];
         trim-final-newlines = true;
         trim-trailing-whitespace = true;
-
         auto-save = {
           focus-lost = true;
           after-delay = {
@@ -87,6 +86,7 @@
           c = "@:sh git commit -a -m \"\"<left>";
           P = "@:sh git push <ret>";
           p = "@:sh git pull <ret>";
+          x = "@ /=======";
         };
       };
     };
