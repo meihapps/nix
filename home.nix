@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     claude-code
     ashell
+    zoxide
   ];
 
   services.dunst = {
@@ -412,7 +413,7 @@
     enable = true;
     settings = {
       font-family = "Fira Code";
-      font-size = 16;
+      font-size = 12;
       theme = "Catppuccin Mocha";
       palette = [
         "5=#cba6f7"
@@ -900,11 +901,11 @@
 
   xdg.configFile."hypr/hyprpaper.conf".text = ''
     splash = false
-    preload = /home/meihapps/.config/hypr/background.png
+    preload = ${./background.png}
 
     wallpaper {
         monitor =
-        path = /home/meihapps/.config/hypr/background.png
+        path = ${./background.png}
         fit_mode = contain
     }
   '';
