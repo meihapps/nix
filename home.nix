@@ -22,6 +22,12 @@
     wireguard-tools
     taskwarrior3
     vesktop
+    hyprshot
+    wl-clipboard
+    cliphist
+    playerctl
+    ddcutil
+    wtype
     (callPackage ./catnap.nix {})
   ];
 
@@ -235,7 +241,7 @@
   xdg.configFile."ashell/config.toml".text = ''
     [modules]
     left = [ "Workspaces" ]
-    center = [ "Updates", "Clock", "tasks" ]
+    center = [ "Clock", "tasks" ]
     right = [ "Tray", "Privacy", "Settings" ]
 
     [clock]
@@ -249,11 +255,7 @@
     [settings]
     remove_airplane_btn = true
 
-    [updates]
-    check_cmd = "checkupdates; paru -Qua"
-    update_cmd = 'ghostty -e fish -c "paru" &'
-
-    [workspaces]
+[workspaces]
     disable_special_workspaces = true
 
     # Catppuccin
@@ -746,6 +748,7 @@
     };
   };
 
+
   xdg.configFile."hypr/hyprland.lua".text = ''
     -- Variables
     local mod = "SUPER"
@@ -859,7 +862,7 @@
     hl.bind("XF86AudioNext",        hl.dsp.exec_cmd("playerctl next --player playerctld"))
 
     -- Screenshots
-    hl.bind("Print", hl.dsp.exec_cmd("bash -c 'grim -g \"$(slurp)\" - | tee /home/meihapps/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png | wl-copy'"))
+    hl.bind("Print", hl.dsp.exec_cmd("hyprshot -m region"))
 
     -- Clipboard
     hl.bind(mod .. " + SHIFT + V", hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"))
@@ -909,6 +912,7 @@
 
     -- Startup
     hl.on("hyprland.start", function()
+        hl.exec_cmd("${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
         hl.exec_cmd("ashell")
         hl.exec_cmd("hyprpaper")
         hl.exec_cmd("hyprlock")
@@ -989,7 +993,7 @@
 
     $accent = $mauve
     $accentAlpha = $mauveAlpha
-    $font = JetBrainsMono Nerd Font
+    $font = FiraMono Nerd Font
 
     general {
       hide_cursor = true

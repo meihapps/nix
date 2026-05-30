@@ -9,5 +9,9 @@
 
   fonts.packages = with pkgs; [
     fira-code
+    nerd-fonts.fira-mono
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
   ];
 }
