@@ -11,6 +11,8 @@
     fd
     ani-cli
     wireguard-tools
+    taskwarrior3
+    (callPackage ./catnap.nix {})
   ];
 
   services.dunst = {
@@ -197,6 +199,8 @@
     Device = XInput2/0/Virtual core pointer
   '';
 
+  xdg.configFile."catnap/distros.toml".source = "${pkgs.callPackage ./catnap.nix {}}/share/catnap/distros.toml";
+
   xdg.configFile."catnap/config.toml".text = ''
     [stats]
     username  = {icon = " ", name = "user", color = "(MA)"}
@@ -209,11 +213,13 @@
 
     sep_color = "SEPARATOR"
 
-    colors    = {icon = " ", name = "colors", color = "!DT!", symbol = ""}
+    colors    = {icon = " ", name = "colors", color = "!DT!", symbol = "●"}
 
     [misc]
+    layout = "Inline"
     borderstyle = "line"
     distro = "arch"
+    stats_margin_top = 1
   '';
 
   xdg.configFile."ashell/config.toml".text = ''
