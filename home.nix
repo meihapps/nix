@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
   home.stateVersion = "26.05";
+  home.packages = with pkgs; [
+    claude-code
+  ];
 
   programs.ghostty = {
     enable = true;
