@@ -1,6 +1,15 @@
 { pkgs, ... }:
 {
   home.stateVersion = "26.05";
+
+  home.pointerCursor = {
+    name = "Bibata-Modern-Classic";
+    package = pkgs.bibata-cursors;
+    size = 32;
+    gtk.enable = true;
+    hyprcursor.enable = true;
+  };
+
   home.packages = with pkgs; [
     claude-code
     ashell
@@ -769,6 +778,7 @@
         },
         misc = {
             disable_hyprland_logo = true,
+            disable_splash_rendering = true,
             force_default_wallpaper = 0,
         },
         xwayland = {
