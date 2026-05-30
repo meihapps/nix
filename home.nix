@@ -12,6 +12,7 @@
     ani-cli
     wireguard-tools
     taskwarrior3
+    vesktop
     (callPackage ./catnap.nix {})
   ];
 
