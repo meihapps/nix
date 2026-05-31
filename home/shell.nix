@@ -189,7 +189,23 @@
       sudo = "sudo -E";
     };
     functions = {
-      reconfig = "sudo nixos-rebuild switch --flake github:meihapps/nix --refresh";
+      reconfig = {
+        body = ''
+          argparse 'a/amend' -- $argv
+
+          git -C /etc/nixos add .
+
+          if set -q _flag_amend
+            git -C /etc/nixos commit --amend -a
+            git -C /etc/nixos push --force
+          else
+            git -C /etc/nixos commit -a
+            git -C /etc/nixos push
+          end
+
+          sudo nixos-rebuild switch --flake github:meihapps/nix --refresh
+        '';
+      };
       fuck = "eval sudo -E $history[1]";
       "!!" = "eval $history[1]";
       hxnotes = ''
