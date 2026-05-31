@@ -101,13 +101,13 @@
     hl.bind(mod .. " + SHIFT + 9", hl.dsp.window.move({ workspace = 9 }))
 
     -- Brightness (ddcutil on bus 8)
-    hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("ddcutil setvcp 10 - 5 --bus 8 --noverify --sleep-multiplier .1 --disable-dynamic-sleep"), { repeating = true })
-    hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("ddcutil setvcp 10 + 5 --bus 8 --noverify --sleep-multiplier .1 --disable-dynamic-sleep"), { repeating = true })
+    hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("ddcutil setvcp 10 - 5 --bus 11 --noverify --sleep-multiplier .1 --disable-dynamic-sleep"), { repeating = true })
+    hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("ddcutil setvcp 10 + 5 --bus 11 --noverify --sleep-multiplier .1 --disable-dynamic-sleep"), { repeating = true })
 
     -- Media / volume
-    hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ toggle"))
-    hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ -5%"), { repeating = true })
-    hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("pactl set-sink-volume @DEFAULT_SINK@ +5%"), { repeating = true })
+    hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
+    hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { repeating = true })
+    hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { repeating = true })
     hl.bind("XF86AudioPrev",        hl.dsp.exec_cmd("playerctl previous --player playerctld"))
     hl.bind("XF86AudioPlay",        hl.dsp.exec_cmd("playerctl play-pause --player playerctld"))
     hl.bind("XF86AudioNext",        hl.dsp.exec_cmd("playerctl next --player playerctld"))
@@ -171,7 +171,6 @@
         hl.exec_cmd("dunst")
         hl.exec_cmd("wl-paste --watch cliphist store")
         hl.exec_cmd("wl-paste --primary --watch cliphist store")
-        hl.exec_cmd("pactl set-card-profile alsa_card.pci-0000_00_1f.3 output:hdmi-stereo+input:analog-stereo")
     end)
 
     -- Environment
