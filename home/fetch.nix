@@ -11,6 +11,7 @@
 
     desktop   = {icon = " ", name = "desktop", color = "(RD)"}
     shell     = {icon = " ", name = "shell", color = "(BE)"}
+    kernel    = {icon = " ", name = "kernel", color = "(BE)"}
 
     sep_color = "SEPARATOR"
 
