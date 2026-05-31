@@ -23,6 +23,10 @@ in
     blacklistedKernelModules = [
       "rtw88_core" "rtw88_usb" "rtw88_8822bu" "rtw_8822b" "rtw88"
     ];
+    kernelPatches = [{
+      name = "btusb-mercusys-ma530";
+      patch = ./btusb-mercusys-ma530.patch;
+    }];
   };
 
   services.pipewire = {
