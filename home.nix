@@ -23,6 +23,8 @@
     taskwarrior3
     vesktop
     hyprshot
+    hyprpaper
+    hyprlock
     wl-clipboard
     cliphist
     playerctl
@@ -384,7 +386,7 @@
       { name = "tide"; src = pkgs.fishPlugins.tide.src; }
     ];
     shellInit = ''
-      set -gx EDITOR helix
+      set -gx EDITOR hx
     '';
     loginShellInit = ''
       if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
