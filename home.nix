@@ -1072,13 +1072,15 @@
     }
   '';
 
+  xdg.configFile."hypr/background.png".source = ./background.png;
+
   xdg.configFile."hypr/hyprpaper.conf".text = ''
     splash = false
-    preload = ${./background.png}
+    preload = ~/.config/hypr/background.png
 
     wallpaper {
         monitor =
-        path = ${./background.png}
+        path = ~/.config/hypr/background.png
         fit_mode = contain
     }
   '';
