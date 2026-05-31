@@ -23,15 +23,7 @@
       modules = [
         { nixpkgs.overlays = [ chaotic.overlays.cache-friendly ]; }
         chaotic.nixosModules.nyx-cache
-        ./boot.nix
-        ./desktop.nix
-        ./hardware.nix
-        ./hardware-configuration.nix
-        ./home-manager.nix
-        ./networking.nix
-        ./nix.nix
-        ./packages.nix
-        ./users.nix
+        ./system
         home-manager.nixosModules.home-manager
       ];
     };
