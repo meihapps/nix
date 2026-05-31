@@ -6,6 +6,7 @@
     ./editor.nix
     ./fetch.nix
     ./git.nix
+    ./gtk.nix
     ./launcher.nix
     ./media.nix
     ./mimeapps.nix

@@ -29,5 +29,6 @@
     ddcutil
     wtype
     (callPackage ../catnap.nix {})
+    thunar
   ];
 }
