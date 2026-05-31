@@ -1,4 +1,9 @@
-{ config, ... }:
+{ config, pkgs, ... }:
+let
+  rtl88x2bu = pkgs.callPackage ./rtl88x2bu.nix {
+    kernel = config.boot.kernelPackages.kernel;
+  };
+in
 {
   hardware.graphics = {
     enable = true;
@@ -12,7 +17,13 @@
     powerOnBoot = true;
   };
 
-  boot.extraModulePackages = [ config.boot.kernelPackages.rtl88x2bu ];
+  boot = {
+    extraModulePackages = [ rtl88x2bu ];
+    kernelModules = [ "88x2bu" ];
+    blacklistedKernelModules = [
+      "rtw88_core" "rtw88_usb" "rtw88_8822bu" "rtw_8822b" "rtw88"
+    ];
+  };
 
   services.pipewire = {
     enable = true;

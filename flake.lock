@@ -562,7 +562,24 @@
         "chaotic": "chaotic",
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "rtl88x2bu": "rtl88x2bu"
+      }
+    },
+    "rtl88x2bu": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1755607961,
+        "narHash": "sha256-ykNAiDvo0kElB0aw+zNz5VJdDtFrmeC7Tu3vHPZ1VzM=",
+        "owner": "Sam23656",
+        "repo": "Rtl88x2bu-NixOS-Driver",
+        "rev": "012bdb29061f5ce66c3e5821691a2b39a43e57a5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sam23656",
+        "repo": "Rtl88x2bu-NixOS-Driver",
+        "type": "github"
       }
     },
     "rust-overlay": {

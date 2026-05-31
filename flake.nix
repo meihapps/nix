@@ -11,8 +11,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    rtl88x2bu = {
+      url = "github:Sam23656/Rtl88x2bu-NixOS-Driver";
+      flake = false;
+    };
   };
-  outputs = inputs@{ self, chaotic, home-manager, hyprland, nixpkgs, ... }: {
+  outputs = inputs@{ self, chaotic, home-manager, hyprland, nixpkgs, rtl88x2bu, ... }: {
     nixosConfigurations.happuter = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
