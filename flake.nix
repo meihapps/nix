@@ -1,5 +1,9 @@
 {
   inputs = {
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     chaotic.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
@@ -16,12 +20,13 @@
       flake = false;
     };
   };
-  outputs = inputs@{ self, chaotic, home-manager, hyprland, nixpkgs, rtl88x2bu, ... }: {
+  outputs = inputs@{ self, agenix, chaotic, home-manager, hyprland, nixpkgs, rtl88x2bu, ... }: {
     nixosConfigurations.happuter = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         { nixpkgs.overlays = [ chaotic.overlays.cache-friendly ]; }
+        agenix.nixosModules.default
         chaotic.nixosModules.nyx-cache
         ./system
         home-manager.nixosModules.home-manager
