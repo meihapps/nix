@@ -2,7 +2,10 @@
 {
   networking = {
     hostName = "happuter";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi.scanRandMacAddress = false;
+    };
   };
 
   time.timeZone = "Europe/London";
