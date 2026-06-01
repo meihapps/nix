@@ -31,6 +31,8 @@ services:
       - services
     environment:
       - OLLAMA_BASE_URL=http://ollama:11434/v1
+    volumes:
+      - /mnt/happssd/projects:/workspace
 
   ollama:
     image: ollama/ollama:rocm
@@ -42,6 +44,23 @@ services:
     networks:
       - services
     restart: unless-stopped
+
+  vllm:
+    image: docker.io/rocm/vllm:rocm7.13.0_gfx120X-all_ubuntu24.04_py3.13_pytorch_2.10.0_vllm_0.19.1
+    command: vllm serve cyankiwi/Qwen3.5-9B-AWQ-4bit --dtype float16 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 76000
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    volumes:
+      - /var/lib/vllm/cache:/root/.cache/huggingface
+    networks:
+      - services
+    ipc: host
+    shm_size: 8g
+    group_add:
+      - video
+    restart: "no"
+
 
 networks:
   services:

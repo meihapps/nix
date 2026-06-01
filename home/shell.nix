@@ -7,6 +7,7 @@
     ];
     shellInit = ''
       set -gx EDITOR hx
+      fish_add_path ~/.cargo/bin
     '';
     loginShellInit = ''
       if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
