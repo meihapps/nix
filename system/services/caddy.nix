@@ -47,6 +47,9 @@ in
 
       @slskd host slskd.meihapps.gay
       reverse_proxy @slskd slskd:5030
+
+      @odysseus host odysseus.meihapps.gay
+      reverse_proxy @odysseus odysseus:7000
     }
   '';
 

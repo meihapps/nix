@@ -9,6 +9,7 @@ in
     ./flaresolverr.nix
     ./jellyfin.nix
     ./lidarr.nix
+    ./odysseus.nix
     ./prowlarr.nix
     ./qbittorrent.nix
     ./slskd.nix
