@@ -24,7 +24,28 @@ in
     autoPrune.enable = true;
   };
 
+  # Docker 29's nftables firewall backend needs `nft` at runtime to install
+  # FORWARD rules for bridge networks. Its restricted systemd PATH omits both
+  # nftables and iptables, so the backend fails silently and no ACCEPT rules
+  # are ever created — blocking all inter-container traffic.
+  systemd.services.docker.path = with pkgs; [ nftables iptables ];
+
+  # With bridge-nf-call-iptables=1, all bridged traffic goes through netfilter
+  # and hits the FORWARD chain. Docker is supposed to insert ACCEPT rules there,
+  # but when it fails to do so reliably, container-to-container traffic is
+  # dropped. Setting these to 0 makes the kernel bypass netfilter entirely for
+  # same-bridge traffic — all containers on br-services can reach each other
+  # without going through iptables/nftables at all.
+  boot.kernel.sysctl = {
+    "net.bridge.bridge-nf-call-iptables" = 0;
+    "net.bridge.bridge-nf-call-ip6tables" = 0;
+  };
+
   virtualisation.oci-containers.backend = "docker";
+
+  systemd.tmpfiles.rules = [
+    "z /mnt/happssd 0755 mei users - -"
+  ];
 
   # Create the shared Docker bridge all service containers attach to.
   # The bridge name is fixed so it can be referenced by the policy routing service.

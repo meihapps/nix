@@ -7,8 +7,8 @@ let
       <SslPort>6969</SslPort>
       <EnableSsl>False</EnableSsl>
       <LaunchBrowser>False</LaunchBrowser>
-      <AuthenticationMethod>Forms</AuthenticationMethod>
-      <AuthenticationRequired>DisabledForLocalAddresses</AuthenticationRequired>
+      <AuthenticationMethod>External</AuthenticationMethod>
+      <AuthenticationType>DisabledForLocalAddresses</AuthenticationType>
       <Branch>master</Branch>
       <LogLevel>info</LogLevel>
       <UrlBase></UrlBase>
