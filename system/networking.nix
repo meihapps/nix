@@ -39,7 +39,21 @@
   time.timeZone = "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
 
-  networking.firewall.enable = true;
+  networking.firewall = {
+    enable = true;
+    trustedInterfaces = [ "tailscale0" ];
+    # nftables fib (used by nixos-fw-rpfilter) only checks the main routing
+    # table, not policy routing tables. Tailscale peer routes live exclusively
+    # in table 52, so strict rpfilter drops every inbound Tailscale packet
+    # before DNAT fires. Loose mode passes if *any* route to the source exists.
+    checkReversePath = "loose";
+    extraCommands = ''
+      iptables -A FORWARD -i tailscale0 -j ACCEPT
+    '';
+    extraStopCommands = ''
+      iptables -D FORWARD -i tailscale0 -j ACCEPT 2>/dev/null || true
+    '';
+  };
 
   programs.ssh.startAgent = true;
 }

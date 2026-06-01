@@ -92,9 +92,14 @@ in
         ${ip} route replace default via "$gateway" dev "$device" table 200
         ${ip} rule del from 172.20.0.0/16 table 200 priority 100 2>/dev/null || true
         ${ip} rule add from 172.20.0.0/16 table 200 priority 100
+        # Tailscale reply traffic must go through tailscale0, not the physical NIC.
+        # Tailscale stores peer routes in table 52, not main — use that directly.
+        ${ip} rule del from 172.20.0.0/16 to 100.64.0.0/10 priority 50 2>/dev/null || true
+        ${ip} rule add from 172.20.0.0/16 to 100.64.0.0/10 priority 50 lookup 52
       '';
       ExecStop = pkgs.writeShellScript "services-policy-routing-stop" ''
         ${ip} rule del from 172.20.0.0/16 table 200 priority 100 2>/dev/null || true
+        ${ip} rule del from 172.20.0.0/16 to 100.64.0.0/10 priority 50 2>/dev/null || true
         ${ip} route flush table 200 2>/dev/null || true
       '';
     };
