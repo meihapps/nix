@@ -2,8 +2,8 @@
 {
   systemd.services.odysseus = {
     description = "Odysseus self-hosted AI workspace";
-    after = [ "docker.service" "network-online.target" "docker-network-services.service" ];
-    wants = [ "network-online.target" ];
+    after = [ "docker.service" "network-online.target" "nss-lookup.target" "docker-network-services.service" ];
+    wants = [ "network-online.target" "nss-lookup.target" ];
     requires = [ "docker.service" "docker-network-services.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
@@ -14,7 +14,7 @@
         if [ ! -d /var/lib/odysseus/.git ]; then
           ${pkgs.git}/bin/git clone https://github.com/pewdiepie-archdaemon/odysseus.git /var/lib/odysseus
         else
-          ${pkgs.git}/bin/git -C /var/lib/odysseus pull --ff-only
+          ${pkgs.git}/bin/git -C /var/lib/odysseus pull --ff-only || true
         fi
         cd /var/lib/odysseus
         if [ ! -f .env ]; then
@@ -43,11 +43,13 @@ services:
       - ollama_data:/root/.ollama
     networks:
       - services
+    environment:
+      - OLLAMA_KEEP_ALIVE=0
+      - OLLAMA_CONTEXT_LENGTH=32768
     restart: unless-stopped
 
   vllm:
     image: docker.io/rocm/vllm:rocm7.13.0_gfx120X-all_ubuntu24.04_py3.13_pytorch_2.10.0_vllm_0.19.1
-    command: vllm serve cyankiwi/Qwen3.5-9B-AWQ-4bit --dtype float16 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --max-model-len 76000
     devices:
       - /dev/kfd
       - /dev/dri
