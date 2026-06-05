@@ -30,5 +30,6 @@
     wtype
     (callPackage ../catnap.nix {})
     thunar
+    piper
   ];
 }

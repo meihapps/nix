@@ -77,7 +77,7 @@
     -- Window Mouse Binds
     hl.bind(mod .. " + mouse:272", hl.dsp.window.drag())
     hl.bind(mod .. " + mouse:273", hl.dsp.window.resize())
-    hl.bind(mod .. " + mouse:278", hl.dsp.layout("togglesplit"))
+    hl.bind(mod .. " + KP_Down", hl.dsp.layout("togglesplit"))
 
     -- Workspaces
     hl.bind(mod .. " + 1", hl.dsp.focus({ workspace = 1 }))
@@ -158,8 +158,8 @@
 
     -- Picture in Picture
     hl.window_rule({ match = { title = "^Picture-in-Picture$" }, float = true, pin = true, keep_aspect_ratio = true })
-    hl.bind(mod .. " + mouse:277", hl.dsp.window.float())
-    hl.bind(mod .. " + mouse:277", hl.dsp.window.pin())
+    hl.bind(mod .. " + KP_End", hl.dsp.window.float())
+    hl.bind(mod .. " + KP_End", hl.dsp.window.pin())
 
     -- Startup
     hl.on("hyprland.start", function()
