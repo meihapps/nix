@@ -6,6 +6,8 @@
   environment.systemPackages = with pkgs; [
     helix
     firefox
+    jdk21
+    prismlauncher
     rocmPackages.rocm-smi
   ];
 
