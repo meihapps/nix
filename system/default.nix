@@ -8,6 +8,7 @@
     ./home-manager.nix
     ./networking.nix
     ./nix.nix
+    ./vpn.nix
     ./packages.nix
     ./services
     ./users.nix
