@@ -113,7 +113,7 @@
     hl.bind("XF86AudioNext",        hl.dsp.exec_cmd("playerctl next --player playerctld"))
 
     -- Screenshots
-    hl.bind("Print", hl.dsp.exec_cmd("hyprshot -m region"))
+    hl.bind("Print", hl.dsp.exec_cmd("hyprshot -m region -o ~/Pictures"))
 
     -- Clipboard
     hl.bind(mod .. " + SHIFT + V", hl.dsp.exec_cmd("cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"))
