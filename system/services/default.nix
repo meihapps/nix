@@ -17,7 +17,7 @@ in
     ./tailscale.nix
   ];
 
-  age.identityPaths = [ "/home/mei/.ssh/id_ed25519" ];
+  age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
   virtualisation.docker = {
     enable = true;
