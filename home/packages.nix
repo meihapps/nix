@@ -33,5 +33,6 @@
     piper
     python3
     uv
+    oterm
   ];
 }

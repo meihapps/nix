@@ -5,11 +5,12 @@ let
 in
 {
   imports = [
+    ./ai.nix
     ./caddy.nix
     ./flaresolverr.nix
     ./jellyfin.nix
     ./lidarr.nix
-    ./odysseus.nix
+    # ./odysseus.nix
     ./prowlarr.nix
     ./qbittorrent.nix
     ./slskd.nix
