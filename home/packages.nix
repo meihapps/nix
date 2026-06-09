@@ -31,5 +31,7 @@
     (callPackage ../catnap.nix {})
     thunar
     piper
+    python3
+    uv
   ];
 }
