@@ -8,7 +8,7 @@ in
   fileSystems."/mnt/happssd" = {
     device = "/dev/disk/by-uuid/a181f2d7-2b6a-4c1b-a0b9-979b1896124a";
     fsType = "ext4";
-    options = [ "nofail" "x-systemd.device-timeout=5" ];
+    options = [ "nofail" "x-systemd.device-timeout=30" ];
   };
 
   hardware.graphics = {

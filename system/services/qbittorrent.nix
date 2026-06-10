@@ -25,7 +25,7 @@
   };
 
   systemd.services."docker-qbittorrent" = {
-    requires = [ "docker-network-services.service" "services-policy-routing.service" ];
-    after = [ "docker-network-services.service" "services-policy-routing.service" ];
+    requires = [ "docker-network-services.service" "services-policy-routing.service" "mnt-happssd.mount" ];
+    after = [ "docker-network-services.service" "services-policy-routing.service" "mnt-happssd.mount" ];
   };
 }

@@ -135,17 +135,18 @@ let
   };
 in
 {
-  users.users.mei.isSystemUser = lib.mkForce false;
-
   services.ollama = {
     enable = true;
     package = pkgs.ollama-rocm;
-    user   = "mei";
-    group  = "users";
     host   = "127.0.0.1";
     port   = 11434;
     models = "/mnt/happssd/ollama/models";
     environmentVariables.OLLAMA_KEEP_ALIVE = "0";
+  };
+
+  systemd.services.ollama = {
+    requires = [ "mnt-happssd.mount" ];
+    after    = [ "mnt-happssd.mount" ];
   };
 
   systemd.services.kani-router = {

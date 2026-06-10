@@ -189,7 +189,7 @@ in
   };
 
   systemd.services."docker-jellyfin" = {
-    requires = [ "docker-network-services.service" ];
-    after = [ "docker-network-services.service" ];
+    requires = [ "docker-network-services.service" "mnt-happssd.mount" ];
+    after = [ "docker-network-services.service" "mnt-happssd.mount" ];
   };
 }
