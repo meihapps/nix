@@ -58,6 +58,8 @@ in
 
   hardware.i2c.enable = true;
 
+  services.fwupd.enable = true;
+
   services.ratbagd.enable = true;
 
   services.blueman.enable = true;
