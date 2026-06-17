@@ -6,9 +6,11 @@
   environment.systemPackages = with pkgs; [
     helix
     firefox
+    gcc
     jdk21
     prismlauncher
     rocmPackages.rocm-smi
+    rustup
   ];
 
   environment.variables.LD_LIBRARY_PATH = [ "${pkgs.rocmPackages.rocm-smi}/lib" ];

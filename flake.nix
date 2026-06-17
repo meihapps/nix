@@ -20,7 +20,15 @@
       flake = false;
     };
   };
-  outputs = inputs@{ self, agenix, chaotic, home-manager, hyprland, nixpkgs, rtl88x2bu, ... }: {
+outputs = inputs@{ self, agenix, chaotic, home-manager, hyprland, nixpkgs, rtl88x2bu, ... }:
+let
+  system = "x86_64-linux";
+  pkgs = import nixpkgs {
+    inherit system;
+    config.allowUnfree = true;
+  };
+in
+  {
     nixosConfigurations.happuter = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -34,4 +42,3 @@
     };
   };
 }
-
