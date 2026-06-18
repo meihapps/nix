@@ -1,5 +1,10 @@
 { pkgs, lib, ... }:
 {
+  age.secrets.cargo-token = {
+    file = ../secrets/cargo-token.age;
+    owner = "mei";
+  };
+
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [

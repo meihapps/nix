@@ -4,6 +4,7 @@ let
   all      = [ mei happuter ];
 in
 {
+  "cargo-token.age".publicKeys            = all;
   "lidarr-api-key.age".publicKeys        = all;
   "prowlarr-api-key.age".publicKeys      = all;
   "slskd-config.age".publicKeys          = all;

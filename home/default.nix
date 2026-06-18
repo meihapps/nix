@@ -2,6 +2,7 @@
 {
   imports = [
     ./bar.nix
+    ./rust.nix
     ./dolphin-emu.nix
     ./editor.nix
     ./fetch.nix
