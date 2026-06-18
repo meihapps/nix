@@ -1,5 +1,14 @@
 { pkgs, lib, ... }:
 {
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      wayland
+      libxkbcommon
+      libGL
+    ];
+  };
+
   programs.steam.enable = true;
   services.gvfs.enable = true;
 
@@ -13,7 +22,6 @@
     rustup
   ];
 
-  environment.variables.LD_LIBRARY_PATH = [ "${pkgs.rocmPackages.rocm-smi}/lib" ];
 
   fonts.packages = with pkgs; [
     fira-code

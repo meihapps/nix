@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.fish = {
     enable = true;
@@ -8,6 +8,13 @@
     shellInit = ''
       set -gx EDITOR hx
       fish_add_path ~/.cargo/bin
+      set -gx LD_LIBRARY_PATH ${lib.makeLibraryPath (with pkgs; [
+        wayland
+        libxkbcommon
+        vulkan-loader
+        libGL
+        rocmPackages.rocm-smi
+      ])}
     '';
     loginShellInit = ''
       if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
