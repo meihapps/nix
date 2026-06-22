@@ -50,6 +50,9 @@ in
 
       @odysseus host odysseus.meihapps.gay
       reverse_proxy @odysseus odysseus:7000
+
+      @openwebui host openwebui.meihapps.gay
+      reverse_proxy @openwebui ${tailscaleIP}:8080
     }
   '';
 

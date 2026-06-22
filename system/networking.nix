@@ -42,7 +42,7 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 25565 ];
-    trustedInterfaces = [ "tailscale0" ];
+    trustedInterfaces = [ "tailscale0" "br-services" ];
     # nftables fib (used by nixos-fw-rpfilter) only checks the main routing
     # table, not policy routing tables. Tailscale peer routes live exclusively
     # in table 52, so strict rpfilter drops every inbound Tailscale packet

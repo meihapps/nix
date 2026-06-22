@@ -135,6 +135,21 @@ let
   };
 in
 {
+  services.open-webui = {
+    enable = true;
+    host = "0.0.0.0";
+    port = 8080;
+    package = pkgs.open-webui.overridePythonAttrs (old: {
+      dependencies = (old.dependencies or []) ++ (with pkgs.python3Packages; [ tiktoken pyee ]);
+    });
+    environment = {
+      # open-webui tries to pip-install frontmatter requirements at runtime,
+      # which fails on NixOS (read-only store). tiktoken is added to the
+      # package's dependencies above so it's importable without pip.
+      ENABLE_PIP_INSTALL_FRONTMATTER_REQUIREMENTS = "false";
+    };
+  };
+
   services.ollama = {
     enable = true;
     package = pkgs.ollama-rocm;
