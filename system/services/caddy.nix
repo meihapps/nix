@@ -48,11 +48,11 @@ in
       @slskd host slskd.meihapps.gay
       reverse_proxy @slskd slskd:5030
 
-      @odysseus host odysseus.meihapps.gay
-      reverse_proxy @odysseus odysseus:7000
-
       @openwebui host openwebui.meihapps.gay
-      reverse_proxy @openwebui ${tailscaleIP}:8080
+      reverse_proxy @openwebui open-webui:8080
+
+      @reader host jina.meihapps.gay
+      reverse_proxy @reader jina-reader:8081
     }
   '';
 

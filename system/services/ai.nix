@@ -135,25 +135,22 @@ let
   };
 in
 {
-  services.open-webui = {
-    enable = true;
-    host = "0.0.0.0";
-    port = 8080;
-    package = pkgs.open-webui.overridePythonAttrs (old: {
-      dependencies = (old.dependencies or []) ++ (with pkgs.python3Packages; [ tiktoken pyee ]);
-    });
-    environment = {
-      # open-webui tries to pip-install frontmatter requirements at runtime,
-      # which fails on NixOS (read-only store). tiktoken is added to the
-      # package's dependencies above so it's importable without pip.
-      ENABLE_PIP_INSTALL_FRONTMATTER_REQUIREMENTS = "false";
-    };
+  virtualisation.oci-containers.containers.open-webui = {
+    image = "ghcr.io/open-webui/open-webui:main";
+    volumes = [ "/var/lib/open-webui/data:/app/backend/data" ];
+    environment.OLLAMA_BASE_URL = "http://100.107.157.33:11434";
+    extraOptions = [ "--network=services" ];
+  };
+
+  systemd.services."docker-open-webui" = {
+    requires = [ "docker-network-services.service" "ollama.service" ];
+    after    = [ "docker-network-services.service" "ollama.service" ];
   };
 
   services.ollama = {
     enable = true;
     package = pkgs.ollama-rocm;
-    host   = "127.0.0.1";
+    host   = "0.0.0.0";
     port   = 11434;
     models = "/mnt/happssd/ollama/models";
     environmentVariables.OLLAMA_KEEP_ALIVE = "0";

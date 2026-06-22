@@ -7,6 +7,7 @@ in
   imports = [
     ./ai.nix
     ./caddy.nix
+    ./jina-reader.nix
     ./flaresolverr.nix
     ./jellyfin.nix
     ./lidarr.nix

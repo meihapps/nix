@@ -50,9 +50,11 @@
     checkReversePath = "loose";
     extraCommands = ''
       iptables -A FORWARD -i tailscale0 -j ACCEPT
+      iptables -A INPUT -i br-services -j ACCEPT
     '';
     extraStopCommands = ''
       iptables -D FORWARD -i tailscale0 -j ACCEPT 2>/dev/null || true
+      iptables -D INPUT -i br-services -j ACCEPT 2>/dev/null || true
     '';
   };
 
