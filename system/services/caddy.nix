@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
   tailscaleIP = "100.107.157.33";
 in
@@ -31,34 +31,63 @@ in
     "d /var/lib/caddy 0755 root root -"
   ];
 
+  age.secrets.porkbun-api-key = {
+    file = ../../secrets/porkbun-api-key.age;
+    mode = "0444";
+  };
+
+  age.secrets.porkbun-secret-key = {
+    file = ../../secrets/porkbun-secret-key.age;
+    mode = "0444";
+  };
+
   environment.etc."caddy/Caddyfile".text = ''
-    :80 {
-      @prowlarr host prowlarr.meihapps.gay
-      reverse_proxy @prowlarr prowlarr:9696
+    {
+      acme_dns porkbun {
+        api_key {$PORKBUN_API_KEY}
+        api_secret_key {$PORKBUN_API_SECRET}
+      }
+    }
 
-      @lidarr host lidarr.meihapps.gay
-      reverse_proxy @lidarr lidarr:8686
+    prowlarr.meihapps.gay {
+      reverse_proxy prowlarr:9696
+    }
 
-      @jellyfin host jellyfin.meihapps.gay
-      reverse_proxy @jellyfin jellyfin:8096
+    lidarr.meihapps.gay {
+      reverse_proxy lidarr:8686
+    }
 
-      @qbittorrent host qbittorrent.meihapps.gay
-      reverse_proxy @qbittorrent qbittorrent:8080
+    jellyfin.meihapps.gay {
+      reverse_proxy jellyfin:8096
+    }
 
-      @slskd host slskd.meihapps.gay
-      reverse_proxy @slskd slskd:5030
+    qbittorrent.meihapps.gay {
+      reverse_proxy qbittorrent:8080
+    }
 
-      @openwebui host openwebui.meihapps.gay
-      reverse_proxy @openwebui open-webui:8080
+    slskd.meihapps.gay {
+      reverse_proxy slskd:5030
+    }
 
-      @reader host jina.meihapps.gay
-      reverse_proxy @reader jina-reader:8081
+    openwebui.meihapps.gay {
+      reverse_proxy open-webui:8080
+    }
+
+    jina.meihapps.gay {
+      reverse_proxy jina-reader:8081
     }
   '';
 
   virtualisation.oci-containers.containers.caddy = {
-    image = "docker.io/library/caddy:latest";
-    ports = [ "${tailscaleIP}:80:80" ];
+    image = "docker.io/serfriz/caddy-porkbun:latest";
+    ports = [
+      "${tailscaleIP}:80:80"
+      "${tailscaleIP}:443:443"
+    ];
+    environmentFiles = [
+      config.age.secrets.porkbun-api-key.path
+      config.age.secrets.porkbun-secret-key.path
+    ];
     volumes = [
       "/etc/caddy/Caddyfile:/etc/caddy/Caddyfile:ro"
       "/var/lib/caddy:/data"
