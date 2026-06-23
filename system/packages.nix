@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, inputs, ... }:
 {
   age.secrets.cargo-token = {
     file = ../secrets/cargo-token.age;
@@ -21,6 +21,7 @@
     helix
     firefox
     gcc
+    inputs.agenix.packages.${pkgs.system}.default
     jdk21
     prismlauncher
     rocmPackages.rocm-smi

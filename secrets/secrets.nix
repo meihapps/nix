@@ -6,6 +6,8 @@ in
 {
   "cargo-token.age".publicKeys            = all;
   "lidarr-api-key.age".publicKeys        = all;
+  "porkbun-api-key.age".publicKeys        = all;
+  "porkbun-secret-key.age".publicKeys    = all;
   "prowlarr-api-key.age".publicKeys      = all;
   "slskd-config.age".publicKeys          = all;
   "mullvad-sjc-wg302-key.age".publicKeys = all;
