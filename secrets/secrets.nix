@@ -13,6 +13,7 @@ in
   "prowlarr-api-key.age".publicKeys              = all;
   "slskd-config.age".publicKeys                  = all;
   "mullvad-sjc-wg302-key.age".publicKeys         = all;
+  "socks5-proxy.age".publicKeys                  = all;
   "vaultwarden-admin-token.age".publicKeys = vps;
   "plausible-secret-key.age".publicKeys          = vps;
 }

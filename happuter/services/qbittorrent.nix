@@ -19,13 +19,15 @@
     ];
     volumes = [
       "/var/lib/qbittorrent:/config"
-      "/mnt/happssd:/downloads"
+      "/mnt/happssd/media/downloads:/downloads"
     ];
     extraOptions = [ "--network=services" ];
   };
 
   systemd.services."docker-qbittorrent" = {
-    requires = [ "docker-network-services.service" "services-policy-routing.service" "mnt-happssd.mount" ];
+    requires = [ "docker-network-services.service" "mnt-happssd.mount" ];
+    # wants (not requires) so a boot-time policy-routing failure doesn't block qBittorrent
+    wants = [ "services-policy-routing.service" ];
     after = [ "docker-network-services.service" "services-policy-routing.service" "mnt-happssd.mount" ];
   };
 

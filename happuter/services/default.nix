@@ -9,6 +9,7 @@ in
     ./caddy.nix
     ./jina-reader.nix
     ./flaresolverr.nix
+    ./gost.nix
     ./jellyfin.nix
     ./lidarr.nix
     # ./odysseus.nix
@@ -80,6 +81,9 @@ in
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
+      Restart = "on-failure";
+      RestartSec = "10s";
+      StartLimitIntervalSec = "0";
       ExecStart = pkgs.writeShellScript "services-policy-routing-start" ''
         gateway=$(${ip} route show table main \
           | ${awk} '/^default/ && !/dev wg/ && !/dev tun/ && !/dev ppp/ {print $3; exit}')
