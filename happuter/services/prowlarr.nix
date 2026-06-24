@@ -51,26 +51,9 @@ in
     extraOptions = [ "--network=services" ];
   };
 
-  systemd.services.prowlarr-proxy-fix = {
-    description = "Point Prowlarr proxy at local gost relay";
-    wantedBy = [ "multi-user.target" ];
-    before = [ "docker-prowlarr.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = pkgs.writeShellScript "prowlarr-proxy-fix" ''
-        [ -f /var/lib/prowlarr/prowlarr.db ] || exit 0
-        ${pkgs.sqlite}/bin/sqlite3 /var/lib/prowlarr/prowlarr.db "
-          UPDATE Config SET Value = 'False' WHERE Key = 'proxyenabled';
-        "
-      '';
-    };
-  };
-
   systemd.services."docker-prowlarr" = {
     requires = [ "docker-network-services.service" ];
-    after = [ "docker-network-services.service" "gost-proxy.service" "prowlarr-proxy-fix.service" ];
-    wants = [ "gost-proxy.service" "prowlarr-proxy-fix.service" ];
+    after = [ "docker-network-services.service" ];
   };
 
   happuter.caddy.virtualHosts."prowlarr.meihapps.gay" = "reverse_proxy prowlarr:9696";
