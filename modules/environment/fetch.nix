@@ -20,7 +20,6 @@
     [misc]
     layout = "Inline"
     borderstyle = "line"
-    distro = "arch"
     stats_margin_top = 1
   '';
 }
