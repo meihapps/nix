@@ -9,4 +9,6 @@
     requires = [ "docker-network-services.service" ];
     after = [ "docker-network-services.service" ];
   };
+
+  happuter.caddy.virtualHosts."jina.meihapps.gay" = "reverse_proxy jina-reader:8081";
 }

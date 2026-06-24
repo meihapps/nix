@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   programs.fish = {
     enable = true;
@@ -8,18 +8,6 @@
     shellInit = ''
       set -gx EDITOR hx
       fish_add_path ~/.cargo/bin
-      set -gx LD_LIBRARY_PATH ${lib.makeLibraryPath (with pkgs; [
-        wayland
-        libxkbcommon
-        vulkan-loader
-        libGL
-        rocmPackages.rocm-smi
-      ])}
-    '';
-    loginShellInit = ''
-      if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-        exec start-hyprland
-      end
     '';
     interactiveShellInit = ''
       zoxide init fish | source
@@ -197,23 +185,6 @@
       sudo = "sudo -E";
     };
     functions = {
-      reconfig = {
-        body = ''
-          argparse 'a/amend' -- $argv
-
-          git -C /etc/nixos add .
-
-          if set -q _flag_amend
-            git -C /etc/nixos commit --amend -a
-            git -C /etc/nixos push --force
-          else
-            git -C /etc/nixos commit -a
-            git -C /etc/nixos push
-          end
-
-          sudo nixos-rebuild switch --flake github:meihapps/nix --refresh
-        '';
-      };
       fuck = "eval sudo -E $history[1]";
       "!!" = "eval $history[1]";
       hxnotes = ''

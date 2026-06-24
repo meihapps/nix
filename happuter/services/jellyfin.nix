@@ -192,4 +192,6 @@ in
     requires = [ "docker-network-services.service" "mnt-happssd.mount" ];
     after = [ "docker-network-services.service" "mnt-happssd.mount" ];
   };
+
+  happuter.caddy.virtualHosts."jellyfin.meihapps.gay" = "reverse_proxy jellyfin:8096";
 }

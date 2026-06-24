@@ -1,8 +1,7 @@
-{ inputs, ... }:
+{ ... }:
 {
   home-manager = {
-    users.mei = import ../home;
-    users.root = import ../home;
+    users.mei = import ./home.nix;
     useGlobalPkgs = true;
     useUserPackages = true;
   };

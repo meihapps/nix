@@ -176,6 +176,9 @@ in
 
   environment.systemPackages = [
     pkgs.opencode
+    pkgs.rocmPackages.rocm-smi
     kaniEnv
   ];
+
+  happuter.caddy.virtualHosts."openwebui.meihapps.gay" = "reverse_proxy open-webui:8080";
 }

@@ -57,4 +57,6 @@ in
     requires = [ "docker-network-services.service" "mnt-happssd.mount" ];
     after = [ "docker-network-services.service" "mnt-happssd.mount" ];
   };
+
+  happuter.caddy.virtualHosts."lidarr.meihapps.gay" = "reverse_proxy lidarr:8686";
 }

@@ -10,6 +10,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,23 +24,30 @@
       flake = false;
     };
   };
-outputs = inputs@{ self, agenix, chaotic, home-manager, hyprland, nixpkgs, rtl88x2bu, ... }:
+outputs = inputs@{ self, agenix, chaotic, disko, home-manager, hyprland, nixpkgs, rtl88x2bu, ... }:
 let
-  system = "x86_64-linux";
-  pkgs = import nixpkgs {
-    inherit system;
-    config.allowUnfree = true;
-  };
+  remoteHosts = builtins.filter (h: h != "happuter") (builtins.attrNames self.nixosConfigurations);
 in
   {
     nixosConfigurations.happuter = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs remoteHosts; };
       modules = [
         { nixpkgs.overlays = [ chaotic.overlays.cache-friendly ]; }
         agenix.nixosModules.default
         chaotic.nixosModules.nyx-cache
-        ./system
+        ./happuter
+        home-manager.nixosModules.home-manager
+      ];
+    };
+
+    nixosConfigurations.happvps = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      specialArgs = { inherit inputs; };
+      modules = [
+        agenix.nixosModules.default
+        disko.nixosModules.disko
+        ./happvps
         home-manager.nixosModules.home-manager
       ];
     };

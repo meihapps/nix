@@ -28,4 +28,6 @@
     requires = [ "docker-network-services.service" "services-policy-routing.service" "mnt-happssd.mount" ];
     after = [ "docker-network-services.service" "services-policy-routing.service" "mnt-happssd.mount" ];
   };
+
+  happuter.caddy.virtualHosts."qbittorrent.meihapps.gay" = "reverse_proxy qbittorrent:8080";
 }

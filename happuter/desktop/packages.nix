@@ -28,7 +28,6 @@
     playerctl
     ddcutil
     wtype
-    (callPackage ../catnap.nix {})
     thunar
     piper
     python3

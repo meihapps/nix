@@ -55,4 +55,6 @@ in
     requires = [ "docker-network-services.service" ];
     after = [ "docker-network-services.service" ];
   };
+
+  happuter.caddy.virtualHosts."prowlarr.meihapps.gay" = "reverse_proxy prowlarr:9696";
 }

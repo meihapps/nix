@@ -15,8 +15,6 @@ in
     ./prowlarr.nix
     ./qbittorrent.nix
     ./slskd.nix
-    ./ssh.nix
-    ./tailscale.nix
   ];
 
   age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];

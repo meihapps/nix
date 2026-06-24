@@ -1,8 +1,15 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 let
   tailscaleIP = "100.107.157.33";
 in
 {
+  options.happuter.caddy.virtualHosts = lib.mkOption {
+    type = lib.types.attrsOf lib.types.lines;
+    default = {};
+  };
+
+  config = {
+
   # Caddy is bound to the Tailscale IP so it's only reachable from your own
   # devices, not the public internet. The wait service below guards against
   # Docker trying to bind the port before tailscale0 has acquired its IP.
@@ -41,42 +48,21 @@ in
     mode = "0444";
   };
 
-  environment.etc."caddy/Caddyfile".text = ''
-    {
-      acme_dns porkbun {
-        api_key {$PORKBUN_API_KEY}
-        api_secret_key {$PORKBUN_API_SECRET}
+  environment.etc."caddy/Caddyfile".text =
+    let
+      vhostBlock = host: body:
+        let indented = lib.replaceStrings ["\n"] ["\n  "] (lib.trim body);
+        in "${host} {\n  ${indented}\n}";
+    in ''
+      {
+        acme_dns porkbun {
+          api_key {$PORKBUN_API_KEY}
+          api_secret_key {$PORKBUN_API_SECRET}
+        }
       }
-    }
 
-    prowlarr.meihapps.gay {
-      reverse_proxy prowlarr:9696
-    }
-
-    lidarr.meihapps.gay {
-      reverse_proxy lidarr:8686
-    }
-
-    jellyfin.meihapps.gay {
-      reverse_proxy jellyfin:8096
-    }
-
-    qbittorrent.meihapps.gay {
-      reverse_proxy qbittorrent:8080
-    }
-
-    slskd.meihapps.gay {
-      reverse_proxy slskd:5030
-    }
-
-    openwebui.meihapps.gay {
-      reverse_proxy open-webui:8080
-    }
-
-    jina.meihapps.gay {
-      reverse_proxy jina-reader:8081
-    }
-  '';
+      ${lib.concatStringsSep "\n\n" (lib.mapAttrsToList vhostBlock config.happuter.caddy.virtualHosts)}
+    '';
 
   virtualisation.oci-containers.containers.caddy = {
     image = "docker.io/serfriz/caddy-porkbun:latest";
@@ -99,4 +85,6 @@ in
     requires = [ "docker-network-services.service" "wait-for-tailscale-ip.service" ];
     after = [ "docker-network-services.service" "wait-for-tailscale-ip.service" ];
   };
+
+  }; # config
 }

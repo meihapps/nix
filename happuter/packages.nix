@@ -21,7 +21,7 @@
     helix
     firefox
     gcc
-    inputs.agenix.packages.${pkgs.system}.default
+    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     jdk21
     prismlauncher
     rocmPackages.rocm-smi
