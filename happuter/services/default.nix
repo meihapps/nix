@@ -69,13 +69,13 @@ in
     };
   };
 
-  # Keep container egress on the physical NIC so that toggling a personal VPN
-  # on the host never affects service traffic. Detects the physical default
-  # gateway at runtime by skipping known VPN interface prefixes.
+  # Keep service container egress on the physical NIC regardless of the
+  # personal VPN toggle. qbittorrent (172.20.0.200) is exempted and always
+  # routed through wg-mullvad via table 201 instead.
   systemd.services.services-policy-routing = {
     description = "Policy routing for services Docker network";
-    after = [ "network-online.target" "docker-network-services.service" ];
-    wants = [ "network-online.target" ];
+    after = [ "network-online.target" "docker-network-services.service" "wireguard-wg-mullvad.service" ];
+    wants = [ "network-online.target" "wireguard-wg-mullvad.service" ];
     requires = [ "docker-network-services.service" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
@@ -100,11 +100,24 @@ in
         # Tailscale stores peer routes in table 52, not main — use that directly.
         ${ip} rule del from 172.20.0.0/16 to 100.64.0.0/10 priority 50 2>/dev/null || true
         ${ip} rule add from 172.20.0.0/16 to 100.64.0.0/10 priority 50 lookup 52
+        # qbittorrent (172.20.0.200) always routes through wg-mullvad via
+        # table 201. The tunnel is always up so there's no blackhole fallback
+        # needed, but we include one as a safety net if wireguard ever fails.
+        ${ip} rule del from 172.20.0.200 table 201 priority 85 2>/dev/null || true
+        ${ip} rule add from 172.20.0.200 table 201 priority 85
+        ${ip} rule del from 172.20.0.200 blackhole priority 95 2>/dev/null || true
+        ${ip} rule add from 172.20.0.200 blackhole priority 95
+        # Repopulate table 201 in case this service restarted after wireguard's
+        # postSetup already ran (route was flushed on stop).
+        ${ip} route replace default dev wg-mullvad table 201 2>/dev/null || true
       '';
       ExecStop = pkgs.writeShellScript "services-policy-routing-stop" ''
         ${ip} rule del from 172.20.0.0/16 table 200 priority 100 2>/dev/null || true
         ${ip} rule del from 172.20.0.0/16 to 100.64.0.0/10 priority 50 2>/dev/null || true
         ${ip} route flush table 200 2>/dev/null || true
+        ${ip} rule del from 172.20.0.200 table 201 priority 85 2>/dev/null || true
+        ${ip} rule del from 172.20.0.200 blackhole priority 95 2>/dev/null || true
+        ${ip} route flush table 201 2>/dev/null || true
       '';
     };
   };

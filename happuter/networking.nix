@@ -7,6 +7,38 @@
       wifi.scanRandMacAddress = false;
       dispatcherScripts = [
         {
+          # When the Mullvad Personal toggle interface (wg-personal) comes up
+          # or down, add or remove the default route via the always-on tunnel.
+          #
+          # On up: first pin the Mullvad endpoint to the physical NIC so that
+          # WireGuard's own keepalive/handshake traffic doesn't loop back into
+          # the tunnel once the default route points at wg-mullvad.
+          source = pkgs.writeShellScript "mullvad-personal-toggle" ''
+            [ "$1" = "wg-personal" ] || exit 0
+            ip="${pkgs.iproute2}/bin/ip"
+            awk="${pkgs.gawk}/bin/awk"
+            mullvad_endpoint="142.147.89.210"
+            case "$2" in
+              up)
+                gw=$($ip route show table main \
+                  | $awk '/^default/ && !/dev wg/ && !/dev tun/ && !/dev ppp/ {print $3; exit}')
+                dev=$($ip route show table main \
+                  | $awk '/^default/ && !/dev wg/ && !/dev tun/ && !/dev ppp/ {print $5; exit}')
+                [ -n "$gw" ] && [ -n "$dev" ] && \
+                  $ip route replace "$mullvad_endpoint/32" via "$gw" dev "$dev"
+                $ip route replace default dev wg-mullvad
+                $ip -6 route replace default dev wg-mullvad
+                ;;
+              down)
+                $ip route del "$mullvad_endpoint/32" 2>/dev/null || true
+                $ip route del default dev wg-mullvad 2>/dev/null || true
+                $ip -6 route del default dev wg-mullvad 2>/dev/null || true
+                ;;
+            esac
+          '';
+          type = "basic";
+        }
+        {
           # When a physical interface comes up, wait for Tailscale to get its
           # IP and then start Caddy. This recovers from the boot race where
           # WiFi connects too slowly for the one-shot wait service to succeed.
@@ -17,7 +49,7 @@
             [ "$ACTION" = "up" ] || exit 0
 
             case "$IFACE" in
-              docker*|br-*|veth*|lo|tailscale*) exit 0 ;;
+              docker*|br-*|veth*|lo|tailscale*|wg-*) exit 0 ;;
             esac
 
             for i in $(seq 1 120); do
