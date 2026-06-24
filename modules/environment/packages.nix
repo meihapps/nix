@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     bat
+    comma
     eza
     fd
     ripgrep
