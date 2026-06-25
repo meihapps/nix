@@ -185,6 +185,9 @@
       sudo = "sudo -E";
     };
     functions = {
+      reconfig.body = ''
+        sudo nixos-rebuild switch --flake github:meihapps/nix --refresh
+      '';
       fuck = "eval sudo -E $history[1]";
       "!!" = "eval $history[1]";
       hxnotes = ''

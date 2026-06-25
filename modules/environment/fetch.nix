@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  xdg.configFile."catnap/distros.toml".source = "${pkgs.callPackage ../catnap.nix {}}/share/catnap/distros.toml";
+  xdg.configFile."catnap/distros.toml".source = "${pkgs.callPackage ./catnap.nix {}}/share/catnap/distros.toml";
 
   xdg.configFile."catnap/config.toml".text = ''
     [stats]

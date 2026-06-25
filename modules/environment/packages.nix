@@ -7,6 +7,8 @@
     fd
     ripgrep
     zoxide
-    (callPackage ../catnap.nix {})
+    taskwarrior3
+    wireguard-tools
+    (callPackage ./catnap.nix {})
   ];
 }

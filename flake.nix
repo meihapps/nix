@@ -36,7 +36,7 @@ in
         { nixpkgs.overlays = [ chaotic.overlays.cache-friendly ]; }
         agenix.nixosModules.default
         chaotic.nixosModules.nyx-cache
-        ./happuter
+        ./devices/happuter
         home-manager.nixosModules.home-manager
       ];
     };
@@ -47,7 +47,7 @@ in
       modules = [
         agenix.nixosModules.default
         disko.nixosModules.disko
-        ./happvps
+        ./devices/happvps
         home-manager.nixosModules.home-manager
       ];
     };

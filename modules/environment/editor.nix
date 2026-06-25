@@ -54,24 +54,6 @@
       };
       language = [
         {
-          name = "python";
-          language-servers = [ "basedpyright" "typos-lsp" ];
-          formatter = { command = "ruff"; args = [ "format" "-" ]; };
-          auto-format = true;
-        }
-        {
-          name = "rust";
-          language-servers = [ "rust-analyzer" "typos-lsp" ];
-          formatter = { command = "rustfmt"; };
-          auto-format = true;
-        }
-        {
-          name = "typescript";
-          language-servers = [ "typescript-language-server" "typos-lsp" ];
-          formatter = { command = "prettier"; args = [ "--parser" "typescript" ]; };
-          auto-format = true;
-        }
-        {
           name = "markdown";
           language-servers = [ "harper-ls" "typos-lsp" ];
         }
