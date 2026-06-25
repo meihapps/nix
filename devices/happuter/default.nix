@@ -15,12 +15,9 @@
     ../../modules/development
   ];
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = { inherit remoteHosts; };
   home-manager.users.mei.imports = [ ./shell.nix ];
 
   nix.settings.build-dir = "/mnt/happssd/nix-builds";
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  system.stateVersion = "26.05";
 }

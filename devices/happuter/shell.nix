@@ -1,6 +1,6 @@
 { pkgs, lib, remoteHosts, ... }:
 {
-  programs.fish.functions.reconfig = {
+  programs.fish.functions.reconfig = lib.mkForce {
     body = let
       rebuildBlock = host: cmd: ''
         printf '%-12s' '${host}'

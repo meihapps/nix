@@ -26,7 +26,8 @@
   };
 outputs = inputs@{ self, agenix, chaotic, disko, home-manager, hyprland, nixpkgs, rtl88x2bu, ... }:
 let
-  remoteHosts = builtins.filter (h: h != "happuter") (builtins.attrNames self.nixosConfigurations);
+  remoteHostsFor = name: builtins.filter (h: h != name) (builtins.attrNames self.nixosConfigurations);
+  remoteHosts = remoteHostsFor "happuter";
 in
   {
     nixosConfigurations.happuter = nixpkgs.lib.nixosSystem {
@@ -37,6 +38,18 @@ in
         agenix.nixosModules.default
         chaotic.nixosModules.nyx-cache
         ./devices/happuter
+        home-manager.nixosModules.home-manager
+      ];
+    };
+
+    nixosConfigurations.happtop = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
+      modules = [
+        { nixpkgs.overlays = [ chaotic.overlays.cache-friendly ]; }
+        agenix.nixosModules.default
+        chaotic.nixosModules.nyx-cache
+        ./devices/happtop
         home-manager.nixosModules.home-manager
       ];
     };

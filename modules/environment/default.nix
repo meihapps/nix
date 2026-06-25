@@ -18,6 +18,11 @@
 
   services.fwupd.enable = true;
 
+  system.stateVersion = "26.05";
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+
   home-manager.users.mei = {};
 
   home-manager.sharedModules = [{
