@@ -4,7 +4,6 @@
     ../../modules/environment
     ../../modules/environment/rust.nix
     ./bar.nix
-    ./dolphin-emu.nix
     ./gtk.nix
     ./launcher.nix
     ./media.nix
