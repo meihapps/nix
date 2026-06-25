@@ -21,5 +21,7 @@
     wtype
     thunar
     piper
+    brightnessctl
+    wdisplays
   ];
 }

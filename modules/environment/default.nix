@@ -10,6 +10,8 @@
 
   programs.fish.enable = true;
 
+  security.sudo.wheelNeedsPassword = false;
+
   time.timeZone = lib.mkDefault "Europe/London";
   i18n.defaultLocale = "en_GB.UTF-8";
   programs.ssh.startAgent = true;

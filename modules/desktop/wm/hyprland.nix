@@ -6,9 +6,6 @@
     local term = "ghostty"
     local menu = "pkill fuzzel || fuzzel"
 
-    -- Monitors
-    hl.monitor({ output = "", mode = "5120x2160@120", position = "0x0", scale = 2 })
-
     -- Config sections
     hl.config({
         dwindle = {
@@ -77,7 +74,6 @@
     -- Window Mouse Binds
     hl.bind(mod .. " + mouse:272", hl.dsp.window.drag())
     hl.bind(mod .. " + mouse:273", hl.dsp.window.resize())
-    hl.bind(mod .. " + KP_Down", hl.dsp.layout("togglesplit"))
 
     -- Workspaces
     hl.bind(mod .. " + 1", hl.dsp.focus({ workspace = 1 }))
@@ -99,10 +95,6 @@
     hl.bind(mod .. " + SHIFT + 7", hl.dsp.window.move({ workspace = 7 }))
     hl.bind(mod .. " + SHIFT + 8", hl.dsp.window.move({ workspace = 8 }))
     hl.bind(mod .. " + SHIFT + 9", hl.dsp.window.move({ workspace = 9 }))
-
-    -- Brightness (ddcutil on bus 8)
-    hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("ddcutil setvcp 10 - 5 --bus 11 --noverify --sleep-multiplier .1 --disable-dynamic-sleep"), { repeating = true })
-    hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("ddcutil setvcp 10 + 5 --bus 11 --noverify --sleep-multiplier .1 --disable-dynamic-sleep"), { repeating = true })
 
     -- Media / volume
     hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"))
@@ -158,8 +150,6 @@
 
     -- Picture in Picture
     hl.window_rule({ match = { title = "^Picture-in-Picture$" }, float = true, pin = true, keep_aspect_ratio = true })
-    hl.bind(mod .. " + KP_End", hl.dsp.window.float())
-    hl.bind(mod .. " + KP_End", hl.dsp.window.pin())
 
     -- Startup
     hl.on("hyprland.start", function()
@@ -177,10 +167,9 @@
     hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
     hl.env("XDG_SESSION_TYPE", "wayland")
     hl.env("XDG_SESSION_DESKTOP", "Hyprland")
-    hl.env("GDK_SCALE", "2")
-    hl.env("QT_SCALE_FACTOR", "2")
     hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
-    hl.env("XCURSOR_SIZE", "32")
-    hl.env("AVALONIA_SCREEN_SCALE_FACTORS", "DP-1=2")
+
+    -- Device-specific config (monitor, brightness, scale env vars, etc.)
+    pcall(dofile, os.getenv("HOME") .. "/.config/hypr/hyprland-device.lua")
   '';
 }

@@ -6,6 +6,4 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvBaUH/v9Te7eFbAjyNpTVjuyP7h8fcsErmwUUxgyEZ meihapps@happtop.local"
     ];
   };
-
-  security.sudo.wheelNeedsPassword = false;
 }

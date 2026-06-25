@@ -3,10 +3,10 @@
   xdg.configFile."ashell/config.toml".text = ''
     [modules]
     left = [ "Workspaces" ]
-    center = [ "Clock", "tasks" ]
+    center = [ "Tempo", "tasks" ]
     right = [ "Tray", "Privacy", "Settings" ]
 
-    [clock]
+    [tempo]
     format = "%Y-%m-%d %H:%M:%S"
 
     [[CustomModule]]

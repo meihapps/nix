@@ -61,6 +61,8 @@
       valign = center
     }
 
+    source = $HOME/.config/hypr/hyprlock-device.conf
+
     input-field {
       monitor =
       size = 300, 60
@@ -78,9 +80,13 @@
       fail_color = $red
       fail_text = <i>$FAIL <b>($ATTEMPTS)</b></i>
       capslock_color = $yellow
-      position = 0, -47
+      position = 0, $inputY
       halign = center
       valign = center
     }
+  '';
+
+  xdg.configFile."hypr/hyprlock-device.conf".text = ''
+    $inputY = 77
   '';
 }

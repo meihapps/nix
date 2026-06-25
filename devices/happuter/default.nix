@@ -16,7 +16,7 @@
   ];
 
   home-manager.extraSpecialArgs = { inherit remoteHosts; };
-  home-manager.users.mei.imports = [ ./shell.nix ];
+  home-manager.users.mei.imports = [ ./shell.nix ./hyprland.nix ./hyprlock.nix ./hyprpaper.nix ];
 
   nix.settings.build-dir = "/mnt/happssd/nix-builds";
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
