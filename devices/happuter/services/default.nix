@@ -7,6 +7,7 @@ in
   imports = [
     ./ai.nix
     ./computer-use.nix
+    ./qdrant.nix
     ./caddy.nix
     ./jina-reader.nix
     ./flaresolverr.nix
