@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./ai.nix
+    ./computer-use.nix
     ./caddy.nix
     ./jina-reader.nix
     ./flaresolverr.nix

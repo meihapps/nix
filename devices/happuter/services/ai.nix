@@ -138,13 +138,19 @@ in
   virtualisation.oci-containers.containers.open-webui = {
     image = "ghcr.io/open-webui/open-webui:main";
     volumes = [ "/var/lib/open-webui/data:/app/backend/data" ];
-    environment.OLLAMA_BASE_URL = "http://100.107.157.33:11434";
+    environment = {
+      OLLAMA_BASE_URL                     = "http://100.107.157.33:11434";
+      ORCHESTRATOR_URL                    = "http://computer-use-server:8081";
+      CHAT_RESPONSE_MAX_TOOL_CALL_RETRIES = "200";
+      TOOL_RESULT_MAX_CHARS               = "50000";
+      TOOL_RESULT_PREVIEW_CHARS           = "2000";
+    };
     extraOptions = [ "--network=services" ];
   };
 
   systemd.services."docker-open-webui" = {
     requires = [ "docker-network-services.service" "ollama.service" ];
-    after    = [ "docker-network-services.service" "ollama.service" ];
+    after    = [ "docker-network-services.service" "ollama.service" "open-computer-use-network.service" ];
   };
 
   services.ollama = {
