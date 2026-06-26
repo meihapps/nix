@@ -12,7 +12,7 @@
     [[CustomModule]]
     name = "tasks"
     type = "Text"
-    listen_cmd = "sh -c 'while true; do echo \"{\\\"text\\\": \\\"$(task due.before:now status:pending count 2>/dev/null)\\\", \\\"alt\\\": \\\"\\\"}\"; sleep 5; done'"
+    listen_cmd = "while true; do echo \"{\\\"text\\\": \\\"$(ssh happvps task due.before:now status:pending count 2>/dev/null)\\\", \\\"alt\\\": \\\"\\\"}\"; sleep 5; done"
 
     [settings]
     remove_airplane_btn = true
