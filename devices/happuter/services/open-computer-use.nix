@@ -35,18 +35,59 @@ in
       ExecStart = pkgs.writeShellScript "ocu-clone" ''
         mkdir -p /opt
         if [ -d "${repoDir}/.git" ]; then
+          before=$(${git} -C "${repoDir}" rev-parse HEAD)
           ${git} -C "${repoDir}" fetch origin
           ${git} -C "${repoDir}" reset --hard origin/main
+          after=$(${git} -C "${repoDir}" rev-parse HEAD)
+          needs_build=0
+          [ "$before" != "$after" ] && needs_build=1
         else
           ${git} clone https://github.com/Wide-Moat/open-computer-use.git "${repoDir}"
+          needs_build=1
         fi
         cat > "${repoDir}/docker-compose.override.yml" <<'EOF'
 services:
   computer-use-server:
-    volumes:
-      - /mnt/happssd/projects:/mnt/happssd/projects:rw
-      - /etc/nixos:/etc/nixos:rw
+    environment:
+      - ADDITIONAL_VOLUMES=/mnt/happssd/projects:/mnt/projects:rw,/etc/nixos:/mnt/nixos:rw
 EOF
+        python3 << 'PYEOF'
+import re
+
+path = '/opt/open-computer-use/computer-use-server/docker_manager.py'
+with open(path) as f:
+    content = f.read()
+
+if '_parse_additional_volumes' not in content:
+    # Insert parsing code after the other CONTAINER_* constants
+    anchor = 'CONTAINER_CPU_LIMIT = float(os.getenv("CONTAINER_CPU_LIMIT", "1.0"))'
+    addition = '''
+ADDITIONAL_VOLUMES = os.getenv("ADDITIONAL_VOLUMES", "")
+
+def _parse_additional_volumes() -> dict:
+    mounts = {}
+    for spec in (s.strip() for s in ADDITIONAL_VOLUMES.split(",") if s.strip()):
+        parts = spec.split(":")
+        if len(parts) >= 2:
+            mounts[parts[0]] = {"bind": parts[1], "mode": parts[2] if len(parts) > 2 else "rw"}
+    return mounts
+'''
+    content = content.replace(anchor, anchor + addition, 1)
+
+    # Inject into the volumes dict
+    old_volumes_tail = '            **skill_manager.get_skill_mounts(\n                skill_manager.get_user_skills_sync(current_user_email.get())\n            ),\n        },'
+    new_volumes_tail = '            **skill_manager.get_skill_mounts(\n                skill_manager.get_user_skills_sync(current_user_email.get())\n            ),\n            **_parse_additional_volumes(),\n        },'
+    content = content.replace(old_volumes_tail, new_volumes_tail, 1)
+
+    with open(path, 'w') as f:
+        f.write(content)
+    print("[ocu-patch] Patched docker_manager.py with ADDITIONAL_VOLUMES support")
+else:
+    print("[ocu-patch] docker_manager.py already patched")
+PYEOF
+        if [ "$needs_build" = "1" ]; then
+          ${compose} -f "${repoDir}/docker-compose.yml" build
+        fi
       '';
     };
   };
@@ -63,8 +104,8 @@ EOF
       RemainAfterExit  = true;
       WorkingDirectory = repoDir;
       EnvironmentFile  = envFile;
-      ExecStart        = "${compose} -f docker-compose.yml up --build -d";
-      ExecStop         = "${compose} -f docker-compose.yml down";
+      ExecStart        = "${compose} -f docker-compose.yml -f docker-compose.override.yml up -d";
+      ExecStop         = "${compose} -f docker-compose.yml -f docker-compose.override.yml down";
       TimeoutStartSec  = "1800";
     };
   };
