@@ -115,14 +115,14 @@
     hl.window_rule({ match = { class = "org.twosheds.iwgtk" },         float = true, size = {"500", "700"}, move = {"monitor_w-500", "50"} })
     hl.window_rule({ match = { class = "swayimg" }, float = true })
 
-    -- Firefox special workspace
-    hl.window_rule({ match = { class = "firefox" }, workspace = "special:firefox" })
+    -- Zen special workspace
+    hl.window_rule({ match = { class = "zen-beta" }, workspace = "special:zen" })
     hl.bind(mod .. " + B", function()
-      local ws = hl.get_workspace("special:firefox")
+      local ws = hl.get_workspace("special:zen")
       if ws ~= nil and ws.windows > 0 then
-        hl.dispatch(hl.dsp.workspace.toggle_special("firefox"))
+        hl.dispatch(hl.dsp.workspace.toggle_special("zen"))
       else
-        hl.dispatch(hl.dsp.exec_cmd("firefox"))
+        hl.dispatch(hl.dsp.exec_cmd("zen-beta"))
       end
     end)
 
