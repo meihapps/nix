@@ -1,5 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  home.file.".local/bin/dunst-sound" = {
+    executable = true;
+    text = ''
+      #!/bin/sh
+      ${pkgs.pipewire}/bin/pw-play ${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/message.oga
+    '';
+  };
+
   services.dunst = {
     enable = true;
     settings = {

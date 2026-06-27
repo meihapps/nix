@@ -19,12 +19,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     rtl88x2bu = {
       url = "github:Sam23656/Rtl88x2bu-NixOS-Driver";
       flake = false;
     };
   };
-outputs = inputs@{ self, agenix, chaotic, disko, home-manager, hyprland, nixpkgs, rtl88x2bu, ... }:
+outputs = inputs@{ self, agenix, chaotic, disko, home-manager, hyprland, nixpkgs, rtl88x2bu, zen-browser, ... }:
 let
   remoteHostsFor = name: builtins.filter (h: h != name) (builtins.attrNames self.nixosConfigurations);
   remoteHosts = remoteHostsFor "happuter";

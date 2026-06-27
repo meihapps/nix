@@ -23,5 +23,6 @@
     piper
     brightnessctl
     wdisplays
+    libnotify
   ];
 }

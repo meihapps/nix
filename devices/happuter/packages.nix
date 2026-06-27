@@ -7,5 +7,6 @@
     jdk21
     prismlauncher
     rocmPackages.rocm-smi
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
