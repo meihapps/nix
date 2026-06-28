@@ -6,7 +6,6 @@ in
 {
   imports = [
     ./ai.nix
-    ./open-computer-use.nix
     ./qdrant.nix
     ./caddy.nix
     ./jina-reader.nix
