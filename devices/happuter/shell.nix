@@ -21,8 +21,8 @@
       localRebuild = "sudo -v\n" +
         rebuildBlock "happuter" "sudo nixos-rebuild switch --flake github:meihapps/nix --refresh";
       remoteRebuilds = lib.concatMapStringsSep "\n"
-        (host: rebuildBlock host "ssh -o ConnectTimeout=10 ${host} sudo nixos-rebuild switch --flake github:meihapps/nix --refresh")
-        remoteHosts;
+        (host: rebuildBlock host "ssh -o ConnectTimeout=10 ${host} reconfig")
+        (remoteHosts ++ [ "happi" ]);
     in ''
       argparse 'a/amend' -- $argv
 

@@ -3,7 +3,8 @@ let
   happuter = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJTHoVAMLQnl4TzcOYj3oPlSfCkt1vnPu5bMjLNBMtK6";
   happtop  = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA11+GPUvCi/Foqw182mFiOZXhk9PUDvI1uoWMAmLz6m";
   happvps  = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOffzKbywSLj5zC5uNSneBoanDMwlyVUpzRgQNPIp9JQ";
-  all      = [ mei happuter happtop ];
+  happi    = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMA4pWGzijs9KD0+7sX4xRA58cVNoWMXTqYJV009UOHR";
+  all      = [ mei happuter happtop happi ];
   vps      = [ mei happvps ];
 in
 {
