@@ -24,18 +24,7 @@ in
     enable = true;
     autoPrune = {
       enable = true;
-      flags = [ "--all" ];
-    };
-  };
-
-  systemd.services.docker-prune-on-boot = {
-    description = "Prune unused Docker images on boot";
-    after = [ "docker.service" ];
-    requires = [ "docker.service" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.docker}/bin/docker image prune --all --force";
+      dates = "daily";
     };
   };
 
