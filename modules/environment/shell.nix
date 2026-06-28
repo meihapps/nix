@@ -7,7 +7,7 @@
     ];
     shellInit = ''
       set -gx EDITOR hx
-      fish_add_path ~/.cargo/bin
+      fish_add_path ~/.cargo/bin ~/.local/bin
     '';
     interactiveShellInit = ''
       zoxide init fish | source

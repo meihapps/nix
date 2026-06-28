@@ -1,5 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  home-manager.users.mei.home.packages = with pkgs; [
+    nodejs
+  ];
+
   home-manager.users.mei.programs.helix.languages.language = [
     {
       name = "typescript";
