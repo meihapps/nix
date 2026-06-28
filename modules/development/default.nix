@@ -5,6 +5,7 @@
     ./rust
     ./python
     ./typescript
+    ./php
   ];
 
   programs.nix-ld = {
