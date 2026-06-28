@@ -3,6 +3,7 @@
   imports = [
     ./caddy.nix
     ./plausible.nix
+    ./status.nix
     ./vaultwarden.nix
     ./website.nix
   ];
