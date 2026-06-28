@@ -6,12 +6,10 @@
 
   systemd.services.website-deploy = {
     description = "Clone/update meihapps.gay website";
-    wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" ];
     wants = [ "network-online.target" ];
     serviceConfig = {
       Type = "oneshot";
-      RemainAfterExit = true;
       User = "caddy";
       ExecStart = pkgs.writeShellScript "website-deploy" ''
         export PATH="${pkgs.git}/bin:${pkgs.git-lfs}/bin:$PATH"
@@ -25,15 +23,11 @@
     };
   };
 
-  services.phpfpm.pools.meihapps = {
-    user = "caddy";
-    settings = {
-      "listen.owner" = "caddy";
-      "pm" = "dynamic";
-      "pm.max_children" = "5";
-      "pm.start_servers" = "2";
-      "pm.min_spare_servers" = "1";
-      "pm.max_spare_servers" = "3";
+  systemd.timers.website-deploy = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "0";
+      OnUnitActiveSec = "5m";
     };
   };
 
@@ -41,13 +35,10 @@
     extraConfig = ''
       root * /var/www/meihapps.gay
       encode gzip
-      php_fastcgi unix//run/phpfpm/meihapps.sock
       file_server
     '';
   };
 
   systemd.services.caddy.after = [ "website-deploy.service" ];
   systemd.services.caddy.requires = [ "website-deploy.service" ];
-  systemd.services.phpfpm-meihapps.after = [ "website-deploy.service" ];
-  systemd.services.phpfpm-meihapps.requires = [ "website-deploy.service" ];
 }
