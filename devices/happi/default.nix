@@ -7,7 +7,7 @@
     ../../modules/environment/git.nix
     ../../modules/environment/packages.nix
     ../../modules/environment/shell.nix
-    ../../modules/media
+    ./services
   ];
 
   home.username = "mei";
