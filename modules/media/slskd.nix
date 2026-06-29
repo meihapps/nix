@@ -1,7 +1,7 @@
 { config, ... }:
 {
   age.secrets.slskd-config = {
-    file = ../../../secrets/slskd-config.age;
+    file = ../../secrets/slskd-config.age;
     mode = "0444";
   };
 

@@ -13,6 +13,7 @@
     ../../modules/environment
     ../../modules/desktop
     ../../modules/development
+    ../../modules/media
   ];
 
   home-manager.extraSpecialArgs = { inherit inputs remoteHosts; };

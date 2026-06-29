@@ -18,7 +18,7 @@ let
   '';
 in
 {
-  age.secrets.lidarr-api-key.file = ../../../secrets/lidarr-api-key.age;
+  age.secrets.lidarr-api-key.file = ../../secrets/lidarr-api-key.age;
 
   # PUID/PGID match the existing lidarr user (uid=954) on the Arch install.
   systemd.tmpfiles.rules = [ "d /var/lib/lidarr 0755 - - -" ];

@@ -18,7 +18,7 @@ let
   '';
 in
 {
-  age.secrets.prowlarr-api-key.file = ../../../secrets/prowlarr-api-key.age;
+  age.secrets.prowlarr-api-key.file = ../../secrets/prowlarr-api-key.age;
 
   systemd.tmpfiles.rules = [ "d /var/lib/prowlarr 0755 root root -" ];
 

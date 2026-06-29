@@ -1,4 +1,5 @@
 { lib, pkgs, ... }:
+
 {
   imports = [
     ../../modules/environment/editor.nix
@@ -15,17 +16,7 @@
   home.packages = [ pkgs.tailscale ];
 
   programs.home-manager.enable = true;
-
   programs.fish.functions.reconfig.body = lib.mkForce ''
     home-manager switch --flake github:meihapps/nix#"mei@happi" --refresh
-  '';
-
-  home.activation.setFishAsDefaultShell = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    if ! grep -qF "$HOME/.nix-profile/bin/fish" /etc/shells; then
-      echo "$HOME/.nix-profile/bin/fish" | sudo tee -a /etc/shells > /dev/null
-    fi
-    if [ "$SHELL" != "$HOME/.nix-profile/bin/fish" ]; then
-      sudo chsh -s "$HOME/.nix-profile/bin/fish" mei
-    fi
   '';
 }
