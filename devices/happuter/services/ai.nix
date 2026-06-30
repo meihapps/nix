@@ -132,6 +132,8 @@ let
     jinja = on
     cache-type-k = q4_0
     cache-type-v = q4_0
+    sleep-idle-seconds = 10
+
 
     [gemma4]
     model = /mnt/happssd/ollama/models/blobs/sha256-88c462c244956232cc947ca61a95db3b52cb7d12c4dbc49cd46403018610000f

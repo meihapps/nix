@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   xdg.configFile."hypr/hyprland.lua".text = ''
     -- Variables
@@ -34,7 +34,7 @@
         },
         xwayland = {
             force_zero_scaling = true,
-        },
+        }
     })
 
     -- Keybinds
