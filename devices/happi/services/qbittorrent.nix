@@ -7,7 +7,7 @@
   systemd.user.services.qbittorrent = {
     Unit = {
       Description = "qBittorrent-nox";
-      After = [ "network.target" "mnt-media.mount" ];
+      After = [ "network-online.target" "mnt-media.mount" ];
       Requires = [ "mnt-media.mount" ];
     };
     Service = {
