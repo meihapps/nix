@@ -10,6 +10,7 @@
 
   home.packages = with pkgs; [
     ashell
+    thunderbird
     vesktop
     hyprshot
     hyprpaper
