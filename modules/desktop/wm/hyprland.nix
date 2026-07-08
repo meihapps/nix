@@ -19,6 +19,9 @@
             ["col.inactive_border"] = "0xff1e1e2e",
             layout = "dwindle",
         },
+        decoration = {
+            rounding = 8,
+        },
         input = {
             kb_layout = "gb",
             kb_variant = "mac",
