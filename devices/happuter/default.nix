@@ -8,7 +8,6 @@
     ./networking.nix
     ./packages.nix
     ./vpn.nix
-    ./services
     ./users.nix
     ../../modules/environment
     ../../modules/desktop
