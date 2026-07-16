@@ -25,7 +25,7 @@
     font_name = "Fira Sans"
     success_color = "#a6e3a1"
     text_color = "#cdd6f4"
-    workspace_colors = [ "#cba6f7" ]
+    workspace_colors = [ "#a6e3a1" ]
 
     [appearance.primary_color]
     base = "#cba6f7"
