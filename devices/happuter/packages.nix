@@ -8,5 +8,6 @@
     obsidian
     prismlauncher
     rocmPackages.rocm-smi
+    ungoogled-chromium
   ];
 }
