@@ -1,0 +1,40 @@
+<svg width="5120" height="2160" viewBox="0 0 2560 1080" xmlns="http://www.w3.org/2000/svg" xml:space="preserve">
+  <!-- background: flat Catppuccin Latte base -->
+  <rect width="2560" height="1080" fill="#eff1f5"/>
+
+  <!-- code panel: plain rounded square -->
+  <rect x="830" y="204" width="900" height="672" rx="22" fill="#1e1e2e"/>
+
+  <!-- code -->
+  <g font-family="'Fira Code','JetBrains Mono','Cascadia Code',Consolas,Menlo,monospace" font-size="26">
+
+    <text x="898" y="301"><tspan fill="#cdd6f4">prev</tspan><tspan fill="#9399b2"> = </tspan><tspan fill="#fab387">-1</tspan></text>
+
+    <text x="898" y="339"><tspan fill="#cdd6f4">nums</tspan><tspan fill="#9399b2"> = (</tspan></text>
+
+    <text x="898" y="377"><tspan fill="#9399b2">    </tspan><tspan fill="#cdd6f4">prev</tspan><tspan fill="#9399b2"> := (</tspan></text>
+
+    <text x="898" y="415"><tspan fill="#9399b2">        </tspan><tspan fill="#cdd6f4">num</tspan><tspan fill="#9399b2"> - </tspan><tspan fill="#89b4fa">max</tspan><tspan fill="#9399b2">(</tspan></text>
+
+    <text x="898" y="453"><tspan fill="#9399b2">            </tspan><tspan fill="#89b4fa">filter</tspan><tspan fill="#9399b2">(</tspan></text>
+
+    <text x="898" y="491"><tspan fill="#9399b2">                </tspan><tspan fill="#cba6f7">lambda</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#cdd6f4">x</tspan><tspan fill="#9399b2">: </tspan><tspan fill="#89b4fa">max</tspan><tspan fill="#9399b2">(</tspan><tspan fill="#cdd6f4">prev</tspan><tspan fill="#9399b2"> + </tspan><tspan fill="#cdd6f4">x</tspan><tspan fill="#9399b2">, </tspan><tspan fill="#cdd6f4">x</tspan><tspan fill="#9399b2">) &lt; </tspan><tspan fill="#cdd6f4">num</tspan><tspan fill="#9399b2">,</tspan></text>
+
+    <text x="898" y="529"><tspan fill="#9399b2">                </tspan><tspan fill="#cdd6f4">primes</tspan></text>
+
+    <text x="898" y="567"><tspan fill="#9399b2">        )))</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#cba6f7">for</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#cdd6f4">num</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#cba6f7">in</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#cdd6f4">nums</tspan><tspan fill="#9399b2">)</tspan></text>
+
+    <text x="898" y="605"><tspan fill="#cba6f7">try</tspan><tspan fill="#9399b2">:</tspan></text>
+
+    <text x="898" y="643"><tspan fill="#9399b2">    </tspan><tspan fill="#cba6f7">for</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#cdd6f4">_</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#cba6f7">in</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#cdd6f4">nums</tspan><tspan fill="#9399b2">:</tspan></text>
+
+    <text x="898" y="681"><tspan fill="#9399b2">        </tspan><tspan fill="#cba6f7">pass</tspan></text>
+
+    <text x="898" y="719"><tspan fill="#9399b2">    </tspan><tspan fill="#cba6f7">return</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#fab387">True</tspan></text>
+
+    <text x="898" y="757"><tspan fill="#cba6f7">except</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#f9e2af">ValueError</tspan><tspan fill="#9399b2">:</tspan></text>
+
+    <text x="898" y="795"><tspan fill="#9399b2">    </tspan><tspan fill="#cba6f7">return</tspan><tspan fill="#9399b2"> </tspan><tspan fill="#fab387">False</tspan></text>
+
+  </g>
+</svg>
