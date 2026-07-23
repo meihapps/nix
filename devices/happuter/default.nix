@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ./audio.nix
     ./boot.nix
+    ./flatpak.nix
     ./hardware.nix
     ./networking.nix
     ./packages.nix

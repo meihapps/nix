@@ -7,7 +7,7 @@
     ];
     shellInit = ''
       set -gx EDITOR hx
-      fish_add_path ~/.cargo/bin ~/.local/bin
+      fish_add_path ~/.cargo/bin ~/.local/bin $HOME/.local/share/flatpak/exports/share /var/lib/flatpak/exports/share $XDG_DATA_DIRS
     '';
     interactiveShellInit = ''
       zoxide init fish | source
