@@ -117,6 +117,7 @@
     hl.window_rule({ match = { class = "org.pulseaudio.pavucontrol" }, float = true, size = {"500", "700"}, move = {"monitor_w-500", "50"} })
     hl.window_rule({ match = { class = "org.twosheds.iwgtk" },         float = true, size = {"500", "700"}, move = {"monitor_w-500", "50"} })
     hl.window_rule({ match = { class = "swayimg" }, float = true })
+    hl.window_rule({ match = { content = "game", fullscreen = true }, confine_pointer = true })
 
     -- Zen special workspace
     hl.window_rule({ match = { class = "zen-beta" }, workspace = "special:zen" })
