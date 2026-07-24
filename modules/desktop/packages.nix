@@ -25,5 +25,6 @@
     brightnessctl
     wdisplays
     libnotify
+    steam
   ];
 }

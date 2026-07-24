@@ -18,6 +18,7 @@
     hl.bind("XF86RFKill", hl.dsp.exec_cmd("rfkill toggle all"))
 
     -- F9 (settings icon) → firefox special workspace
+    hl.window_rule({ match = { class = "firefox" }, workspace = "special:firefox" })
     hl.bind("XF86Tools", function()
       local ws = hl.get_workspace("special:firefox")
       if ws ~= nil and ws.windows > 0 then
