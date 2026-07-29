@@ -14,10 +14,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    fenix.url = "github:nix-community/fenix";
+    hyprland.url = "github:hyprwm/Hyprland";
     nixpkgs.url = "github:NixOS/nixpkgs/a799d3e3886da994fa307f817a6bc705ae538eeb";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
@@ -27,7 +25,7 @@
     };
   };
 
-outputs = inputs@{ self, agenix, chaotic, disko, home-manager, hyprland, nixpkgs, rtl88x2bu, zen-browser, ... }:
+outputs = inputs@{ self, agenix, chaotic, disko, fenix, home-manager, hyprland, nixpkgs, rtl88x2bu, zen-browser, ... }:
 let
   remoteHostsFor = name: builtins.filter (h: h != name) (builtins.attrNames self.nixosConfigurations);
   remoteHosts = remoteHostsFor "happuter";
