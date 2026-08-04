@@ -6,7 +6,7 @@
 
   services.getty.autologinUser = "mei";
 
-  users.users.mei.extraGroups = [ "audio" "bluetooth" "i2c" "input" "networkmanager" "render" "video" ];
+  users.users.mei.extraGroups = [ "audio" "bluetooth" "i2c" "input" "networkmanager" "render" "uinput" "video" ];
 
   environment.systemPackages = [ pkgs.firefox ];
 
@@ -18,14 +18,16 @@
     noto-fonts-color-emoji
   ];
 
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
+  hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+
+    enableRedistributableFirmware = true;
+    i2c.enable = true;
+    uinput.enable = true;
   };
-
-  hardware.enableRedistributableFirmware = true;
-
-  hardware.i2c.enable = true;
 
   programs.hyprland = {
     enable = true;
