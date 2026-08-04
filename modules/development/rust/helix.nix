@@ -1,7 +1,17 @@
 { ... }:
 {
   programs.helix.languages = {
-    language-server.typos-lsp.command = "typos-lsp";
+    language-server = {
+      rust-analyzer.config.check = {
+        command = "clippy";
+        extraArgs = [
+          "--"
+          "-W" "clippy::all"
+          "-W" "clippy::pedantic"
+        ];
+      };
+      typos-lsp.command = "typos-lsp";
+    };
     language = [
       {
         name = "rust";
