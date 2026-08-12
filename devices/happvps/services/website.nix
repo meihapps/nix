@@ -33,6 +33,10 @@
 
   services.caddy.virtualHosts."meihapps.gay" = {
     extraConfig = ''
+      handle /* {
+                  reverse_proxy localhost:9167
+      }
+
       root * /var/www/meihapps.gay
       encode gzip
       file_server

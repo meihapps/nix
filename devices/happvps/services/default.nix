@@ -2,6 +2,7 @@
 {
   imports = [
     ./caddy.nix
+    ./matrix.nix
     ./flaresolverr.nix
     ./plausible.nix
     ./status.nix
