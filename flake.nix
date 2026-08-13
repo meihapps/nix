@@ -16,7 +16,7 @@
     };
     fenix.url = "github:nix-community/fenix";
     hyprland.url = "github:hyprwm/Hyprland";
-    nixpkgs.url = "github:NixOS/nixpkgs/a799d3e3886da994fa307f817a6bc705ae538eeb";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     rtl88x2bu = {
