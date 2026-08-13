@@ -8,4 +8,6 @@
     ./users.nix
     ../../modules/environment
   ];
+
+  nix.settings.build-dir = "/mnt/data/nix-builds";
 }
