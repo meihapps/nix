@@ -1,10 +1,11 @@
 { pkgs, ... }:
 {
   imports = [
-    ./rust
-    ./python
-    ./typescript
+    ./nix
     ./php
+    ./python
+    ./rust
+    ./typescript
   ];
 
   programs.nix-ld = {
