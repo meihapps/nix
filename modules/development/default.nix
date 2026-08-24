@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ./generic.nix
     ./rust
     ./python
     ./typescript
