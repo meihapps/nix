@@ -1,31 +1,41 @@
 {
   inputs = {
+    fenix.url = "github:nix-community/fenix";
+    hyprland.url = "github:hyprwm/Hyprland";
+    nixpkgs.url = "github:NixOS/nixpkgs";
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chaotic.url = "github:chaotic-cx/nyx/65484713d962e7f1ddd42ce5012350b3b0298552";
-    chaotic.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    chaotic = {
+      url = "github:chaotic-cx/nyx/65484713d962e7f1ddd42ce5012350b3b0298552";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    fenix.url = "github:nix-community/fenix";
-    hyprland.url = "github:hyprwm/Hyprland";
-    nixpkgs.url = "github:NixOS/nixpkgs";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     rtl88x2bu = {
       url = "github:Sam23656/Rtl88x2bu-NixOS-Driver";
       flake = false;
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.home-manager.follows = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-outputs = inputs@{ self, agenix, chaotic, disko, fenix, home-manager, hyprland, nixpkgs, rtl88x2bu, zen-browser, ... }:
+outputs = inputs@{ self, agenix, chaotic, disko, fenix, home-manager, hyprland, nixpkgs, quickshell, rtl88x2bu, zen-browser, ... }:
 let
   remoteHostsFor = name: builtins.filter (h: h != name) (builtins.attrNames self.nixosConfigurations);
   remoteHosts = remoteHostsFor "happuter";
