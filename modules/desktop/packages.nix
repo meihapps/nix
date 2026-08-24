@@ -10,8 +10,6 @@
   };
 
   home.packages = with pkgs; [
-    inputs.quickshell.packages.${stdenv.hostPlatform.system}.default
-
     ashell
     brightnessctl
     cliphist

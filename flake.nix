@@ -8,6 +8,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     chaotic = {
       url = "github:chaotic-cx/nyx/65484713d962e7f1ddd42ce5012350b3b0298552";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,10 +22,6 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rtl88x2bu = {
@@ -35,7 +35,7 @@
     };
   };
 
-outputs = inputs@{ self, agenix, chaotic, disko, fenix, home-manager, hyprland, nixpkgs, quickshell, rtl88x2bu, zen-browser, ... }:
+outputs = inputs@{ self, agenix, caelestia-shell, chaotic, disko, fenix, home-manager, hyprland, nixpkgs, rtl88x2bu, zen-browser, ... }:
 let
   remoteHostsFor = name: builtins.filter (h: h != name) (builtins.attrNames self.nixosConfigurations);
   remoteHosts = remoteHostsFor "happuter";

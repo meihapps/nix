@@ -29,10 +29,7 @@
     uinput.enable = true;
   };
 
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-  };
+  programs.hyprland.enable = true;
 
   security.polkit.enable = true;
 
@@ -41,17 +38,20 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  home-manager.users.mei.imports = [
-    ./bar.nix
-    ./gtk.nix
-    ./launcher.nix
-    ./media.nix
-    ./mimeapps.nix
-    ./monitoring.nix
-    ./notifications.nix
-    ./packages.nix
-    ./pdf.nix
-    ./shell.nix
-    ./wm
-  ];
+  home-manager = {
+    sharedModules = [
+      inputs.caelestia-shell.homeManagerModules.default
+    ];
+
+    users.mei.imports = [
+      ./caelestia.nix
+      ./gtk.nix
+      ./media.nix
+      ./mimeapps.nix
+      ./notifications.nix
+      ./packages.nix
+      ./pdf.nix
+      ./shell.nix
+    ];
+  };
 }
