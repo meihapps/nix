@@ -157,12 +157,13 @@
 
     -- Startup
     hl.on("hyprland.start", function()
+        hl.exec_cmd("ashell")
+        hl.exec_cmd("dunst")
         hl.exec_cmd("${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
         hl.exec_cmd("${pkgs.gvfs}/libexec/gvfsd")
-        hl.exec_cmd("ashell")
         hl.exec_cmd("hyprpaper")
         hl.exec_cmd("hyprlock")
-        hl.exec_cmd("dunst")
+        hl.exec_cmd("qs")
         hl.exec_cmd("wl-paste --watch cliphist store")
         hl.exec_cmd("wl-paste --primary --watch cliphist store")
     end)

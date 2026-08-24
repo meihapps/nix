@@ -4,6 +4,7 @@
     ./nix
     ./php
     ./python
+    ./qml
     ./rust
     ./typescript
   ];

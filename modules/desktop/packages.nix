@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   home.pointerCursor = {
     enable = true;
@@ -10,22 +10,24 @@
   };
 
   home.packages = with pkgs; [
+    inputs.quickshell.packages.${stdenv.hostPlatform.system}.default
+
     ashell
-    thunderbird
-    vesktop
+    brightnessctl
+    cliphist
+    ddcutil
     hyprshot
     hyprpaper
     hyprlock
-    wl-clipboard
-    cliphist
-    playerctl
-    ddcutil
-    wtype
-    thunar
-    piper
-    brightnessctl
-    wdisplays
     libnotify
+    piper
+    playerctl
     steam
+    thunar
+    thunderbird
+    vesktop
+    wdisplays
+    wl-clipboard
+    wtype
   ];
 }

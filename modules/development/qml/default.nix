@@ -1,6 +1,8 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    qmlls
+    kdePackages.qtdeclarative
   ];
+
+  qt.enable = true;
 }
