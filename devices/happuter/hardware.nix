@@ -39,9 +39,11 @@ in
     }];
   };
 
-  services.ratbagd.enable = true;
-
-  services.blueman.enable = true;
-
-  powerManagement.cpuFreqGovernor = "performance";
+  services = {
+    blueman.enable = true;
+    ratbagd.enable = true;
+    udev.extraRules = ''
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", MODE="0666", TAG+="uaccess"
+    '';
+  };
 }
