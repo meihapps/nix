@@ -20,6 +20,9 @@
         accel_profile = "flat",
         natural_scroll = true,
       },
+      misc = {
+        middle_click_paste = true,
+      },
     })
   '';
 
