@@ -24,6 +24,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    llama-cpp = {
+        url = "github:ggml-org/llama.cpp";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
     rtl88x2bu = {
       url = "github:Sam23656/Rtl88x2bu-NixOS-Driver";
       flake = false;
