@@ -6,6 +6,7 @@
     ./boot.nix
     ./flatpak.nix
     ./hardware.nix
+    ./local.nix
     ./networking.nix
     ./packages.nix
     ./vpn.nix
