@@ -17,11 +17,11 @@ in
       ExecStart = ''
         ${llama}/bin/llama-server \
           --model /mnt/happssd/llama/model.gguf \
-          --mmproj /mnt/happssd/llama/mmproj-F16.gguf
+          --mmproj /mnt/happssd/llama/mmproj-F16.gguf \
           --host 127.0.0.1 \
           --port 8080 \
           --n-gpu-layers 999 \
-          --ctx-size 131072 \
+          --ctx-size 65535 \
           --batch-size 2048 \
           --ubatch-size 2048 \
           --threads 12 \
@@ -31,7 +31,8 @@ in
           --flash-attn on \
           --cache-type-k q8_0 \
           --cache-type-v q4_0 \
-          --kv-unified
+          --kv-unified \
+          --sleep-idle-seconds 30
       '';
 
       Restart = "on-failure";
