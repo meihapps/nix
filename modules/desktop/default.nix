@@ -29,7 +29,10 @@
     uinput.enable = true;
   };
 
-  programs.hyprland.enable = true;
+  programs = {
+    gamescope.enable = true;
+    hyprland.enable = true;
+  };
 
   security.polkit.enable = true;
 

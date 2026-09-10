@@ -24,17 +24,58 @@
         middle_click_paste = true,
       },
     })
+
+    hl.window_rule({
+      match = { xdg_tag = "^(proton-game)$" },
+      tag = "+video-game",
+    })
+
+    hl.window_rule({
+      match = { content = "game" },
+      tag = "+video-game",
+    })
+
+    hl.window_rule({
+      match = { initial_class = "^steam_app(_%d+|default)?$" },
+      tag = "+video-game",
+    })
+
+    hl.window_rule({
+      match = { initial_class = "^.*%.exe$" },
+      tag = "+video-game",
+    })
+
+    hl.window_rule({
+      name = "video-games",
+      match = { tag = "video-game" },
+
+      border_size = 0,
+      decorate = false,
+      fullscreen = true,
+      idle_inhibit = "always",
+      immediate = true,
+      no_anim = true,
+      no_blur = true,
+      no_dim = true,
+      no_max_size = true,
+      no_shadow = true,
+      persistent_size = true,
+      pseudo = true,
+      render_unfocused = true,
+      rounding = 0,
+      sync_fullscreen = true,
+    })
   '';
 
   xdg.configFile."caelestia/hypr-vars.lua".text = ''
     return {
-        terminal = "ghostty",
-        browser = "zen-beta",
-        editor = "hx",
-        volumeStep = 5,
-        volumeMax = 200,
-        kbMoveWinToWs = "SUPER + SHIFT",
-        kbMoveWinToWsGroup = "CTRL + SUPER + SUPER",
+      terminal = "ghostty",
+      browser = "zen-beta",
+      editor = "hx",
+      volumeStep = 5,
+      volumeMax = 200,
+      kbMoveWinToWs = "SUPER + SHIFT",
+      kbMoveWinToWsGroup = "CTRL + SUPER + SUPER",
     }
   '';
 
