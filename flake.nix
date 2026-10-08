@@ -1,6 +1,5 @@
 {
   inputs = {
-    fenix.url = "github:nix-community/fenix";
     hyprland.url = "github:hyprwm/Hyprland";
     nixpkgs.url = "github:NixOS/nixpkgs";
 
@@ -39,7 +38,7 @@
     };
   };
 
-outputs = inputs@{ self, agenix, caelestia-shell, chaotic, disko, fenix, home-manager, hyprland, nixpkgs, rtl88x2bu, zen-browser, ... }:
+outputs = inputs@{ self, agenix, caelestia-shell, chaotic, disko, home-manager, hyprland, nixpkgs, rtl88x2bu, zen-browser, ... }:
 let
   remoteHostsFor = name: builtins.filter (h: h != name) (builtins.attrNames self.nixosConfigurations);
   remoteHosts = remoteHostsFor "happuter";

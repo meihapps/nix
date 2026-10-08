@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   age.secrets.cargo-token = {
     file = ../../../secrets/cargo-token.age;
@@ -6,8 +6,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    (inputs.fenix.packages.${pkgs.stdenv.hostPlatform.system}.stable.toolchain)
-    rust-analyzer
+    rustup
     gcc
   ];
 
@@ -15,4 +14,6 @@
     ./credentials.nix
     ./helix.nix
   ];
+
+  programs.nix-ld.enable = true;
 }
