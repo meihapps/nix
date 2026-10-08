@@ -9,6 +9,10 @@
     ./typescript
   ];
 
+  environment.systemPackages = with pkgs; [
+    jujutsu
+  ];
+
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
