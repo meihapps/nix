@@ -1,5 +1,14 @@
-{ pkgs, ... }:
-
+{ config, pkgs, ... }:
+# let
+#   rtl88x2bu = config.boot.kernelPackages.rtl88x2bu.overrideAttrs (old: {
+#     src = pkgs.fetchFromGitHub {
+#       owner = "RinCat";
+#       repo = "RTL88x2BU-Linux-Driver";
+#       rev = "master";
+#       hash = "sha256-zURAL+79SPuoWW8W5ZOz8On1g8LMVeaFNLRsQujwgV8=";
+#     };
+#   });
+# in
 {
   fileSystems."/mnt/happssd" = {
     device = "/dev/disk/by-uuid/a181f2d7-2b6a-4c1b-a0b9-979b1896124a";
@@ -23,20 +32,13 @@
     xpadneo.enable = true;
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
   chaotic.nyx.cache.enable = true;
 
-  # boot = {
-  #   extraModulePackages = [ rtl88x2bu ];
-  #   kernelModules = [ "88x2bu" ];
-  #   blacklistedKernelModules = [
-  #     "rtw88_core" "rtw88_usb" "rtw88_8822bu" "rtw_8822b" "rtw88"
-  #   ];
-  #   kernelPatches = [{
-  #     name = "btusb-mercusys-ma530";
-  #     patch = ./btusb-mercusys-ma530.patch;
-  #   }];
-  # };
+  boot = {
+    # blacklistedKernelModules = [ "rtw88_8822bu" ];
+    # extraModulePackages = [ rtl88x2bu ];
+    kernelPackages = pkgs.linuxPackages_cachyos;
+  };
 
   services = {
     blueman.enable = true;

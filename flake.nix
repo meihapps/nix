@@ -22,10 +22,6 @@
     llama-cpp = {
         url = "github:ggml-org/llama.cpp";
         inputs.nixpkgs.follows = "nixpkgs";
-      };
-    rtl88x2bu = {
-      url = "github:Sam23656/Rtl88x2bu-NixOS-Driver";
-      flake = false;
     };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -34,7 +30,7 @@
     };
   };
 
-outputs = inputs@{ self, agenix, caelestia-shell, chaotic, disko, home-manager, nixpkgs, rtl88x2bu, zen-browser, ... }:
+outputs = inputs@{ self, agenix, caelestia-shell, chaotic, disko, home-manager, nixpkgs, zen-browser, ... }:
 let
   remoteHostsFor = name: builtins.filter (h: h != name) (builtins.attrNames self.nixosConfigurations);
   remoteHosts = remoteHostsFor "happuter";

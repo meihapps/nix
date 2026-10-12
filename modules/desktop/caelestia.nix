@@ -3,6 +3,7 @@
   programs.caelestia = {
     enable = true;
     cli.enable = true;
+    systemd.enable = false;
   };
 
   xdg.configFile."caelestia/hypr-user.lua".text = ''
