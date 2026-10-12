@@ -1,29 +1,7 @@
-{ pkgs, lib, remoteHosts, ... }:
+{ lib, ... }:
 {
   programs.fish.functions.reconfig = lib.mkForce {
-    body = let
-      rebuildBlock = host: cmd: ''
-        printf '%-12s' '${host}'
-        set tmpfile (mktemp)
-        ${cmd} >$tmpfile 2>&1
-        if test $status -ne 0
-          echo FAILED
-        else
-          set warns (grep -ic warn $tmpfile 2>/dev/null)
-          if test "$warns" -gt 0 2>/dev/null
-            echo "ok ($warns warnings)"
-          else
-            echo ok
-          end
-        end
-        rm -f $tmpfile
-      '';
-      localRebuild = "sudo -v\n" +
-        rebuildBlock "happuter" "sudo nixos-rebuild switch --flake github:meihapps/nix --refresh";
-      remoteRebuilds = lib.concatMapStringsSep "\n"
-        (host: rebuildBlock host "ssh -o ConnectTimeout=10 ${host} reconfig")
-        (remoteHosts ++ [ "happi" ]);
-    in ''
+    body = ''
       argparse 'a/amend' -- $argv
 
       git -C /etc/nixos add .
@@ -36,8 +14,7 @@
         git -C /etc/nixos push
       end
 
-      ${localRebuild}
-      ${remoteRebuilds}
+      sudo nixos-rebuild switch --flake github:meihapps/nix#happuter --refresh
       notify-send "reconfig" "done"
     '';
   };

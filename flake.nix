@@ -1,7 +1,7 @@
 {
   inputs = {
-    hyprland.url = "github:hyprwm/Hyprland";
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -9,10 +9,6 @@
     };
     caelestia-shell = {
       url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    chaotic = {
-      url = "github:chaotic-cx/nyx/65484713d962e7f1ddd42ce5012350b3b0298552";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
@@ -38,7 +34,7 @@
     };
   };
 
-outputs = inputs@{ self, agenix, caelestia-shell, chaotic, disko, home-manager, hyprland, nixpkgs, rtl88x2bu, zen-browser, ... }:
+outputs = inputs@{ self, agenix, caelestia-shell, chaotic, disko, home-manager, nixpkgs, rtl88x2bu, zen-browser, ... }:
 let
   remoteHostsFor = name: builtins.filter (h: h != name) (builtins.attrNames self.nixosConfigurations);
   remoteHosts = remoteHostsFor "happuter";
@@ -48,9 +44,10 @@ in
       system = "x86_64-linux";
       specialArgs = { inherit inputs remoteHosts; };
       modules = [
-        { nixpkgs.overlays = [ chaotic.overlays.cache-friendly ]; }
         agenix.nixosModules.default
         chaotic.nixosModules.nyx-cache
+        chaotic.nixosModules.nyx-overlay
+        chaotic.nixosModules.nyx-registry
         ./devices/happuter
         home-manager.nixosModules.home-manager
       ];
@@ -60,29 +57,13 @@ in
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
-        { nixpkgs.overlays = [ chaotic.overlays.cache-friendly ]; }
         agenix.nixosModules.default
         chaotic.nixosModules.nyx-cache
+        chaotic.nixosModules.nyx-overlay
+        chaotic.nixosModules.nyx-registry
         ./devices/happtop
         home-manager.nixosModules.home-manager
       ];
-    };
-
-    nixosConfigurations.happvps = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        agenix.nixosModules.default
-        disko.nixosModules.disko
-        ./devices/happvps
-        home-manager.nixosModules.home-manager
-      ];
-    };
-
-    homeConfigurations."mei@happi" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.aarch64-linux;
-      extraSpecialArgs = { inherit inputs; };
-      modules = [ ./devices/happi ];
     };
   };
 }

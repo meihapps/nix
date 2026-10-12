@@ -3,7 +3,6 @@
   imports = [
     ./hardware-configuration.nix
     ./audio.nix
-    ./boot.nix
     ./flatpak.nix
     ./hardware.nix
     ./local.nix

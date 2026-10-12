@@ -1,21 +1,15 @@
 let
-  mei      = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvBaUH/v9Te7eFbAjyNpTVjuyP7h8fcsErmwUUxgyEZ";
-  happuter = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJTHoVAMLQnl4TzcOYj3oPlSfCkt1vnPu5bMjLNBMtK6";
-  happtop  = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA11+GPUvCi/Foqw182mFiOZXhk9PUDvI1uoWMAmLz6m";
-  happvps  = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOffzKbywSLj5zC5uNSneBoanDMwlyVUpzRgQNPIp9JQ";
-  happi    = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMA4pWGzijs9KD0+7sX4xRA58cVNoWMXTqYJV009UOHR";
-  all      = [ mei happuter happtop happi ];
-  vps      = [ mei happvps ];
+  key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGvBaUH/v9Te7eFbAjyNpTVjuyP7h8fcsErmwUUxgyEZ";
 in
 {
-  "cargo-token.age".publicKeys                    = all;
-  "lidarr-api-key.age".publicKeys                = all;
-  "porkbun-api-key.age".publicKeys                = all;
-  "porkbun-secret-key.age".publicKeys            = all;
-  "prowlarr-api-key.age".publicKeys              = all;
-  "slskd-config.age".publicKeys                  = all;
-  "mullvad-sjc-wg302-key.age".publicKeys         = all;
-  "socks5-proxy.age".publicKeys                  = all;
-  "vaultwarden-admin-token.age".publicKeys = vps;
-  "plausible-secret-key.age".publicKeys          = vps;
+  "cargo-token.age".publicKeys                   = key;
+  "lidarr-api-key.age".publicKeys                = key;
+  "porkbun-api-key.age".publicKeys               = key;
+  "porkbun-secret-key.age".publicKeys            = key;
+  "prowlarr-api-key.age".publicKeys              = key;
+  "slskd-config.age".publicKeys                  = key;
+  "mullvad-sjc-wg302-key.age".publicKeys         = key;
+  "socks5-proxy.age".publicKeys                  = key;
+  "vaultwarden-admin-token.age".publicKeys       = key;
+  "plausible-secret-key.age".publicKeys          = key;
 }
