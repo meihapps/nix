@@ -215,5 +215,12 @@
         cd $prev
       '';
     };
+    loginShellInit = ''
+      if status is-login
+          if uwsm check may-start; and uwsm select
+              exec uwsm start default
+          end
+      end
+    '';
   };
 }
