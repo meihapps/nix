@@ -1,14 +1,4 @@
-{ config, pkgs, ... }:
-# let
-#   rtl88x2bu = config.boot.kernelPackages.rtl88x2bu.overrideAttrs (old: {
-#     src = pkgs.fetchFromGitHub {
-#       owner = "RinCat";
-#       repo = "RTL88x2BU-Linux-Driver";
-#       rev = "master";
-#       hash = "sha256-zURAL+79SPuoWW8W5ZOz8On1g8LMVeaFNLRsQujwgV8=";
-#     };
-#   });
-# in
+{ pkgs, ... }:
 {
   fileSystems."/mnt/happssd" = {
     device = "/dev/disk/by-uuid/a181f2d7-2b6a-4c1b-a0b9-979b1896124a";
@@ -34,11 +24,7 @@
 
   chaotic.nyx.cache.enable = true;
 
-  boot = {
-    # blacklistedKernelModules = [ "rtw88_8822bu" ];
-    # extraModulePackages = [ rtl88x2bu ];
-    kernelPackages = pkgs.linuxPackages_cachyos;
-  };
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   services = {
     blueman.enable = true;
