@@ -66,6 +66,11 @@
       rounding = 0,
       sync_fullscreen = true,
     })
+
+    hl.window_rule({
+        match = { tag = "video_game" },
+        workspace = "special:special"
+    })
   '';
 
   xdg.configFile."caelestia/hypr-vars.lua".text = ''
