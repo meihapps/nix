@@ -8,6 +8,7 @@
     ./local.nix
     ./networking.nix
     ./packages.nix
+    ./rgb.nix
     ./vpn.nix
     ./users.nix
     ../../modules/environment
