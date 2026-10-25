@@ -30,6 +30,10 @@
   };
 
   programs = {
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
     gamescope.enable = true;
     hyprland = {
       enable = true;
