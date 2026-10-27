@@ -7,6 +7,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    autoclicke-rs = {
+      url = "github:meihapps/autoclicke-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     caelestia-shell = {
       url = "github:caelestia-dots/shell";
       inputs.nixpkgs.follows = "nixpkgs";

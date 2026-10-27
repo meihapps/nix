@@ -20,6 +20,26 @@
         "type": "github"
       }
     },
+    "autoclicke-rs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793144622,
+        "narHash": "sha256-h40BvMmW3DG4MJS5Ty07+zRob9nfYAhWdAkZ8kgSsYI=",
+        "owner": "meihapps",
+        "repo": "autoclicke-rs",
+        "rev": "23206eb18da1a419517baf3600690d57e531537c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "meihapps",
+        "repo": "autoclicke-rs",
+        "type": "github"
+      }
+    },
     "caelestia-cli": {
       "inputs": {
         "caelestia-shell": [
@@ -292,6 +312,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "autoclicke-rs": "autoclicke-rs",
         "caelestia-shell": "caelestia-shell",
         "chaotic": "chaotic",
         "disko": "disko",
