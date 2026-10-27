@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, lib, inputs, ... }:
 
 let
   llama = inputs.llama-cpp.packages.${pkgs.system}.rocm;
@@ -45,8 +45,13 @@ in
     };
   };
 
+  # disabled: open-webui -> chromadb -> posthog is marked broken in nixpkgs
+  # (posthog's mcp integration doesn't support mcp v2)
+  warnings = lib.optional (builtins.tryEval pkgs.open-webui.drvPath).success
+    "open-webui evaluates again: re-enable it in devices/happuter/local.nix";
+
   services.open-webui = {
-    enable = true;
+    enable = false;
     host = "0.0.0.0";
     port = 3000;
 
