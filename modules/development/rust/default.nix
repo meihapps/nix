@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     rustup
     gcc
+    cargo-release
   ];
 
   home-manager.users.mei.imports = [
