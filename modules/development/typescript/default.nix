@@ -2,14 +2,9 @@
 {
   home-manager.users.mei.home.packages = with pkgs; [
     nodejs
-    chromium
-    playwright-driver.browsers
+    typescript-language-server
+    prettier
   ];
-
-  environment.sessionVariables = {
-    PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
-    PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "true";
-  };
 
   home-manager.users.mei.programs.helix.languages.language = [
     {

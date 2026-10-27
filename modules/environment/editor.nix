@@ -1,5 +1,7 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  home.packages = with pkgs; [ harper typos-lsp ];
+
   programs.helix = {
     enable = true;
     settings = {

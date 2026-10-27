@@ -5,7 +5,7 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    ignores = [ "**/.claude/settings.local.json" ];
+    ignores = [ "**/.claude/settings.local.json" ".direnv/" ];
     settings = {
       init.defaultBranch = "main";
       user = {

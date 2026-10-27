@@ -61,5 +61,24 @@ in
         home-manager.nixosModules.home-manager
       ];
     };
+
+    devShells.x86_64-linux.playwright =
+      let pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      in pkgs.mkShell {
+        packages = [ pkgs.nodejs pkgs.playwright-driver.browsers ];
+        PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+        PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "true";
+      };
+
+    templates = {
+      rust = {
+        path = ./templates/rust;
+        description = "Rust dev shell with toolchain from rust-toolchain.toml";
+      };
+      rust-wasm = {
+        path = ./templates/rust-wasm;
+        description = "Rust wasm dev shell with trunk and the wasm32 target";
+      };
+    };
   };
 }
