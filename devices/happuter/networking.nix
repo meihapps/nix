@@ -6,6 +6,9 @@
       enable = true;
       insertNameservers = [ "1.1.1.1" "1.0.0.1" ];
     };
+    # 1.1.1.1 intermittently drops UDP queries on this line; fail over fast
+    # instead of waiting glibc's default 5s per server.
+    resolvconf.extraOptions = [ "timeout:1" "attempts:2" ];
   };
 
   networking.firewall = {
