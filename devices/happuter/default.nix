@@ -23,5 +23,4 @@
   ];
 
   nix.settings.build-dir = "/mnt/happssd/nix-builds";
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

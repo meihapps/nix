@@ -17,6 +17,7 @@
   };
 
   services.caddy.virtualHosts."passwords.meihapps.gay".extraConfig = ''
+    import tailnet
     reverse_proxy 127.0.0.1:8222
   '';
 }

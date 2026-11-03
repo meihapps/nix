@@ -1,7 +1,7 @@
 { ... }:
 {
-  networking.hostName = "happvps";
-  networking.useDHCP = true;
+  networking.hostName = "happserver";
+  networking.networkmanager.enable = true;
 
   networking.firewall = {
     enable = true;

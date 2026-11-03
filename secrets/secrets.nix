@@ -3,12 +3,9 @@ let
 in
 {
   "cargo-token.age".publicKeys                   = key;
-  "lidarr-api-key.age".publicKeys                = key;
   "porkbun-api-key.age".publicKeys               = key;
   "porkbun-secret-key.age".publicKeys            = key;
-  "prowlarr-api-key.age".publicKeys              = key;
   "slskd-config.age".publicKeys                  = key;
-  "socks5-proxy.age".publicKeys                  = key;
   "vaultwarden-admin-token.age".publicKeys       = key;
   "plausible-secret-key.age".publicKeys          = key;
   "ivpn-key.age".publicKeys                      = key;

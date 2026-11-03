@@ -15,10 +15,6 @@
       url = "github:caelestia-dots/shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,7 +30,7 @@
     };
   };
 
-outputs = inputs@{ self, agenix, caelestia-shell, chaotic, disko, home-manager, nixpkgs, zen-browser, ... }:
+outputs = inputs@{ self, agenix, caelestia-shell, chaotic, home-manager, nixpkgs, zen-browser, ... }:
 let
   remoteHostsFor = name: builtins.filter (h: h != name) (builtins.attrNames self.nixosConfigurations);
   remoteHosts = remoteHostsFor "happuter";
@@ -62,6 +58,16 @@ in
         chaotic.nixosModules.nyx-overlay
         chaotic.nixosModules.nyx-registry
         ./devices/happtop
+        home-manager.nixosModules.home-manager
+      ];
+    };
+
+    nixosConfigurations.happserver = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
+      modules = [
+        agenix.nixosModules.default
+        ./devices/happserver
         home-manager.nixosModules.home-manager
       ];
     };

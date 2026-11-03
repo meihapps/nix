@@ -2,13 +2,16 @@
 {
   networking = {
     hostName = "happuter";
-    networkmanager = {
-      enable = true;
-      insertNameservers = [ "1.1.1.1" "1.0.0.1" ];
-    };
-    # 1.1.1.1 intermittently drops UDP queries on this line; fail over fast
-    # instead of waiting glibc's default 5s per server.
-    resolvconf.extraOptions = [ "timeout:1" "attempts:2" ];
+    networkmanager.enable = true;
+    nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  };
+
+  # Sends tailnet names to Tailscale and everything else to the nameservers
+  # above. A flat resolv.conf can't do this: 1.1.1.1 answers NXDOMAIN for
+  # tailnet names and the lookup never reaches Tailscale's resolver.
+  services.resolved = {
+    enable = true;
+    settings.Resolve.Domains = [ "~." ];
   };
 
   networking.firewall = {

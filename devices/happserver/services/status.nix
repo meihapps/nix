@@ -1,5 +1,10 @@
 { pkgs, ... }:
 {
+  programs.git = {
+    enable = true;
+    lfs.enable = true;
+  };
+
   systemd.tmpfiles.rules = [
     "d /var/www/status.meihapps.gay 0755 caddy caddy -"
   ];
@@ -17,8 +22,8 @@
           git clone https://github.com/meihapps/happnet-status.git /var/www/status.meihapps.gay
         else
           git -C /var/www/status.meihapps.gay pull --ff-only
-          (cd /var/www/status.meihapps.gay && git lfs pull)
         fi
+        git -C /var/www/status.meihapps.gay lfs pull
       '';
     };
   };

@@ -1,9 +1,6 @@
 { config, ... }:
 {
-  age.secrets.plausible-secret-key = {
-    file = ../../../secrets/plausible-secret-key.age;
-    owner = "plausible";
-  };
+  age.secrets.plausible-secret-key.file = ../../../secrets/plausible-secret-key.age;
 
   services.plausible = {
     enable = true;
