@@ -9,5 +9,4 @@ in
   "vaultwarden-admin-token.age".publicKeys       = key;
   "plausible-secret-key.age".publicKeys          = key;
   "ivpn-key.age".publicKeys                      = key;
-  "ivpn-psk.age".publicKeys                      = key;
 }
