@@ -1,7 +1,10 @@
-{ pkgs, lib, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 let
-  llama = inputs.llama-cpp.packages.${pkgs.system}.rocm;
+  # useWebUi = false: upstream webui build fails (llama-brand tarball dep isn't
+  # provided by importNpmLock), and open-webui is the frontend anyway
+  llama = (inputs.llama-cpp.packages.${pkgs.system}.rocm.override { useWebUi = false; })
+    .overrideAttrs { webui = null; };
 in
 {
   environment.systemPackages = [
@@ -45,13 +48,8 @@ in
     };
   };
 
-  # disabled: open-webui -> chromadb -> posthog is marked broken in nixpkgs
-  # (posthog's mcp integration doesn't support mcp v2)
-  warnings = lib.optional (builtins.tryEval pkgs.open-webui.drvPath).success
-    "open-webui evaluates again: re-enable it in devices/happuter/local.nix";
-
   services.open-webui = {
-    enable = false;
+    enable = true;
     host = "0.0.0.0";
     port = 3000;
 

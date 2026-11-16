@@ -66,6 +66,39 @@ stdenv.mkDerivation rec {
         return total - available;
     }
     EOF
+
+    # nim's nre needs pcre v1, which nixpkgs dropped; replace the two regexes
+    cat > src/catnaplib/noregex.nim << 'EOF'
+    import std/strutils
+
+    proc isBatteryName*(s: string): bool =
+        ## Matches ^BAT\d+$
+        s.len > 3 and s.startsWith("BAT") and s[3..^1].allCharsInSet(Digits)
+
+    proc stripAnsi*(s: string): string =
+        ## Removes \e(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])
+        var i = 0
+        while i < s.len:
+            if s[i] == '\e' and i + 1 < s.len and s[i + 1] == '[':
+                var j = i + 2
+                while j < s.len and s[j] in {'0'..'?'}: inc j
+                while j < s.len and s[j] in {' '..'/'}: inc j
+                if j < s.len and s[j] in {'@'..'~'}:
+                    i = j + 1
+                    continue
+            elif s[i] == '\e' and i + 1 < s.len and s[i + 1] in {'@'..'Z', '\\'..'_'}:
+                i += 2
+                continue
+            result.add s[i]
+            inc i
+    EOF
+
+    substituteInPlace src/catnaplib/platform/probe.nim \
+      --replace-fail 'import nre' 'import ../noregex' \
+      --replace-fail '.contains(nre.re"^BAT\d+$")' '.isBatteryName'
+    substituteInPlace src/catnaplib/terminal/colors.nim \
+      --replace-fail 'import nre' 'import ../noregex' \
+      --replace-fail 's.replace(nre.re"\e(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])", "")' 'stripAnsi(s)'
   '';
 
   buildPhase = ''

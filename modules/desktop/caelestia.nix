@@ -26,6 +26,10 @@
       },
     })
 
+    -- caps:super makes Caps Lock act as Super_L, but the SUPER_L launcher bind
+    -- doesn't fire for it on Hyprland 0.57, so bind the physical key (xkb code 66) too
+    hl.bind("SUPER + code:66", hl.dsp.global("caelestia:launcher"), { release = true })
+
     hl.window_rule({
       match = { xdg_tag = "^(proton-game)$" },
       tag = "+video-game",
@@ -81,7 +85,7 @@
       volumeStep = 5,
       volumeMax = 200,
       kbMoveWinToWs = "SUPER + SHIFT",
-      kbMoveWinToWsGroup = "CTRL + SUPER + SUPER",
+      kbMoveWinToWsGroup = "CTRL + SUPER + SHIFT",
     }
   '';
 
