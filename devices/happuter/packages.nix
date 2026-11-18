@@ -22,5 +22,6 @@ in
     prismlauncher
     rocmPackages.rocm-smi
     ungoogled-chromium
+    wowup-cf
   ];
 }
