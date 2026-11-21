@@ -16,6 +16,7 @@
 
     hl.config({
       input = {
+        kb_layout = "gb",
         kb_options = "caps:super",
         sensitivity = -0.6,
         accel_profile = "flat",

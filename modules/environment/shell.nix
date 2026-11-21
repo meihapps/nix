@@ -178,9 +178,9 @@
       cat = { expansion = "bat"; position = "anywhere"; };
       grep = { expansion = "rg"; position = "anywhere"; };
       find = { expansion = "fd"; position = "anywhere"; };
-      mkdir = { expansion = "mkdir -p"; position = "anywhere"; };
-      cp = { expansion = "cp -iv"; position = "anywhere"; };
-      mv = { expansion = "mv -iv"; position = "anywhere"; };
+      mkdir = "mkdir -p";
+      cp = "cp -iv";
+      mv = "mv -iv";
       fetch = "catnap";
       sudo = "sudo -E";
     };
