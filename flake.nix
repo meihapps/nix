@@ -11,10 +11,6 @@
       url = "github:meihapps/autoclicke-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    caelestia-shell = {
-      url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,6 +19,10 @@
       url = "github:librepods-org/librepods/linux/rust";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # noctalia family: no nixpkgs follows so noctalia.cachix.org hits
+    luciole.url = "github:noctalia-dev/luciole/cachix";
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+    umbriel.url = "github:noctalia-dev/umbriel/cachix";
     llama-cpp = {
         url = "github:ggml-org/llama.cpp";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -34,7 +34,7 @@
     };
   };
 
-outputs = inputs@{ self, agenix, caelestia-shell, chaotic, home-manager, nixpkgs, zen-browser, ... }:
+outputs = inputs@{ self, agenix, chaotic, home-manager, nixpkgs, zen-browser, ... }:
 let
   remoteHostsFor = name: builtins.filter (h: h != name) (builtins.attrNames self.nixosConfigurations);
   remoteHosts = remoteHostsFor "happuter";

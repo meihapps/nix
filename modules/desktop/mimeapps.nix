@@ -23,6 +23,7 @@
       "x-scheme-handler/unknown" = "zen-beta.desktop";
       "application/zip" = "xarchiver.desktop";
       "image/gif" = "swayimg.desktop";
+      "inode/directory" = "dev.noctalia.luciole.desktop";
     };
     associations.added = {
       "image/jpeg" = [ "com.mitchellh.ghostty.desktop" ];

@@ -20,6 +20,7 @@
   home-manager.users.mei.imports = [
     ./shell.nix
     ./sine.nix
+    { programs.umbriel.settings.output.DP-1.scale = 2; }
   ];
 
   nix.settings.build-dir = "/mnt/happssd/nix-builds";

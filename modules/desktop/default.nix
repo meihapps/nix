@@ -1,10 +1,25 @@
 { inputs, pkgs, ... }:
 {
-  imports = [ ./audio.nix ];
+  imports = [
+    ./audio.nix
+    inputs.luciole.nixosModules.default
+    inputs.noctalia.nixosModules.default
+    inputs.umbriel.nixosModules.default
+  ];
 
   services.gvfs.enable = true;
 
-  services.getty.autologinUser = "mei";
+  services.displayManager.noctalia-greeter = {
+    enable = true;
+    settings = {
+      keyboard.layout = "gb";
+      session.default = "Umbriel";
+    };
+    cursorTheme = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+    };
+  };
 
   users.users.mei.extraGroups = [ "audio" "bluetooth" "i2c" "input" "networkmanager" "render" "uinput" "video" ];
 
@@ -35,10 +50,9 @@
       binfmt = true;
     };
     gamescope.enable = true;
-    hyprland = {
-      enable = true;
-      withUWSM = true;
-    };
+    luciole.enable = true;
+    noctalia.enable = true;
+    umbriel.enable = true;
   };
 
   security.polkit.enable = true;
@@ -47,24 +61,24 @@
     enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
     ];
   };
 
   home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+
     sharedModules = [
-      inputs.caelestia-shell.homeManagerModules.default
+      inputs.umbriel.homeModules.default
     ];
 
     users.mei.imports = [
-      ./caelestia.nix
       ./gtk.nix
       ./media.nix
       ./mimeapps.nix
-      ./notifications.nix
       ./packages.nix
       ./pdf.nix
       ./shell.nix
+      ./umbriel.nix
     ];
   };
 }
