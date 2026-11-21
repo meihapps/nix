@@ -5,7 +5,6 @@
     ./audio.nix
     ./flatpak.nix
     ./hardware.nix
-    ./local.nix
     ./networking.nix
     ./packages.nix
     ./rgb.nix

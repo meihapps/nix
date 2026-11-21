@@ -28,7 +28,6 @@ let
       start = [
         "workspaces"
         "current"
-        "launcher_2"
         "nix-monitor"
         "indicator"
         "widget"
@@ -118,7 +117,6 @@ let
       "thaer99ob/default-apps"
       "alexander/screen-toolkit"
       "noctalia/bitwarden"
-      "alexander/game-launcher"
       "prponkshe/umbriel-displays"
       "radimous/prismlauncher-instances"
       "detluck/performance-plus"
@@ -151,7 +149,6 @@ let
       bar_4.type = "prponkshe/umbriel-displays:bar";
       current.type = "thaer99ob/default-apps:current";
       indicator.type = "detluck/performance-plus:indicator";
-      launcher_2.type = "alexander/game-launcher:launcher";
       media.album_art_only = true;
       network.show_label = false;
       nix-monitor = {

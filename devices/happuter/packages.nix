@@ -20,7 +20,6 @@ in
     jdk21
     obsidian
     prismlauncher
-    rocmPackages.rocm-smi
     ungoogled-chromium
     wowup-cf
   ];
