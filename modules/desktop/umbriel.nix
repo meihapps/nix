@@ -8,6 +8,7 @@
       include.files = [ "${inputs.umbriel}/examples/config.toml" ];
       general.autostart = [ "noctalia" ];
       input = {
+        focus.follows_mouse = "always";
         keyboard = {
           layout = "gb";
           options = "caps:super";

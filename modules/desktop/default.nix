@@ -3,7 +3,6 @@
   imports = [
     ./audio.nix
     inputs.luciole.nixosModules.default
-    inputs.noctalia.nixosModules.default
     inputs.umbriel.nixosModules.default
   ];
 
@@ -51,11 +50,13 @@
     };
     gamescope.enable = true;
     luciole.enable = true;
-    noctalia.enable = true;
     umbriel.enable = true;
   };
 
   security.polkit.enable = true;
+
+  # noctalia performance-plus plugin (powerprofilesctl)
+  services.power-profiles-daemon.enable = true;
 
   xdg.portal = {
     enable = true;
@@ -68,6 +69,7 @@
     extraSpecialArgs = { inherit inputs; };
 
     sharedModules = [
+      inputs.noctalia.homeModules.default
       inputs.umbriel.homeModules.default
     ];
 
@@ -75,6 +77,7 @@
       ./gtk.nix
       ./media.nix
       ./mimeapps.nix
+      ./noctalia.nix
       ./packages.nix
       ./pdf.nix
       ./shell.nix

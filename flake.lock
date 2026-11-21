@@ -380,6 +380,38 @@
         "type": "github"
       }
     },
+    "noctalia-plugins-community": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795209504,
+        "narHash": "sha256-b5o9/7zz1tb9O6+argBWEmAhj0zrGOZN/aURETER5sA=",
+        "owner": "noctalia-dev",
+        "repo": "community-plugins",
+        "rev": "546e0b72fda2bcb41a6bd07acfc41e37e4508eae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "community-plugins",
+        "type": "github"
+      }
+    },
+    "noctalia-plugins-official": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795109125,
+        "narHash": "sha256-iUIwljJGup34okKOYOxFMxF2woK9mv0wg7o5DuuHkB4=",
+        "owner": "noctalia-dev",
+        "repo": "official-plugins",
+        "rev": "8b99df3ca7e35822b938bf92fb32e8cc2f90027e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "official-plugins",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -391,6 +423,8 @@
         "luciole": "luciole",
         "nixpkgs": "nixpkgs_4",
         "noctalia": "noctalia",
+        "noctalia-plugins-community": "noctalia-plugins-community",
+        "noctalia-plugins-official": "noctalia-plugins-official",
         "umbriel": "umbriel",
         "zen-browser": "zen-browser"
       }

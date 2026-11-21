@@ -22,6 +22,14 @@
     # noctalia family: no nixpkgs follows so noctalia.cachix.org hits
     luciole.url = "github:noctalia-dev/luciole/cachix";
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
+    noctalia-plugins-community = {
+      url = "github:noctalia-dev/community-plugins";
+      flake = false;
+    };
+    noctalia-plugins-official = {
+      url = "github:noctalia-dev/official-plugins";
+      flake = false;
+    };
     umbriel.url = "github:noctalia-dev/umbriel/cachix";
     llama-cpp = {
         url = "github:ggml-org/llama.cpp";
