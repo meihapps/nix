@@ -5,7 +5,7 @@
   programs.helix = {
     enable = true;
     settings = {
-      theme = "catppuccin_mocha";
+      theme = "noctalia";
       editor = {
         color-modes = true;
         completion-replace = true;

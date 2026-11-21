@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   programs.umbriel = {
     enable = true;
@@ -6,6 +6,8 @@
     # included tables merge by key and this file is applied last
     settings = {
       include.files = [ "${inputs.umbriel}/examples/config.toml" ];
+      # palette rendered by noctalia's built-in umbriel template
+      include.optional.files = [ "${config.xdg.configHome}/umbriel/noctalia.toml" ];
       general.autostart = [ "noctalia" ];
       input = {
         focus.follows_mouse = "always";

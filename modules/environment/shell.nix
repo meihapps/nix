@@ -7,7 +7,7 @@
     ];
     shellInit = ''
       set -gx EDITOR hx
-      fish_add_path ~/.cargo/bin ~/.local/bin $HOME/.local/share/flatpak/exports/share /var/lib/flatpak/exports/share $XDG_DATA_DIRS
+      fish_add_path ~/.cargo/bin ~/.local/bin
     '';
     interactiveShellInit = ''
       zoxide init fish | source
@@ -185,6 +185,7 @@
       sudo = "sudo -E";
     };
     functions = {
+      fish_greeting = "catnap";
       _tide_item_context.body = ''
         if set -q SSH_TTY
           set -fx tide_context_color A6E3A1

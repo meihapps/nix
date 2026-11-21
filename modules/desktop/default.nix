@@ -10,6 +10,8 @@
 
   services.displayManager.noctalia-greeter = {
     enable = true;
+    # lets noctalia push theme/wallpaper to the greeter without a polkit prompt
+    passwordlessSyncUsers = [ "mei" ];
     settings = {
       keyboard.layout = "gb";
       session.default = "Umbriel";

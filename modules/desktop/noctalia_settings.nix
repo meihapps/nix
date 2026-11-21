@@ -35,6 +35,7 @@ let
         "status"
         "bar_3"
         "bar_4"
+        "bar"
       ];
     };
     config_version = 20;
@@ -206,9 +207,11 @@ let
       community_palette = "Monochrome";
       mode = "dark";
       source = "wallpaper";
+      templates.builtin_ids = [ "btop" "ghostty" "helix" "luciole" "umbriel" ];
       wallpaper_scheme = "muted";
     };
     widget = {
+      bar.type = "asj/task-warrior:bar";
       bar_2.type = "rylos/tailnet:bar";
       bar_3.type = "noctalia/umbriel-companion:bar";
       bar_4.type = "prponkshe/umbriel-displays:bar";
