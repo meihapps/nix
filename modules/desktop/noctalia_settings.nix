@@ -38,6 +38,67 @@ let
       ];
     };
     config_version = 20;
+    desktop_widgets = {
+      grid = {
+        cell_size = 16;
+        major_interval = 4;
+        visible = true;
+      };
+      schema_version = 2;
+      widget = {
+        desktop-widget-0000000000000001 = {
+          box_height = 0.0;
+          box_width = 0.0;
+          cx = 1280.0;
+          cy = 540.0;
+          output = "DP-1";
+          placement_height = 1080.0;
+          placement_width = 2560.0;
+          rotation = 0.0;
+          type = "noctalia/lyrics:desktop";
+        };
+        desktop-widget-0000000000000002 = {
+          box_height = 0.0;
+          box_width = 0.0;
+          cx = 2396.5;
+          cy = 79.0;
+          output = "DP-1";
+          placement_height = 1080.0;
+          placement_width = 2560.0;
+          rotation = 0.0;
+          type = "rylos/tailnet:desktop";
+        };
+        desktop-widget-0000000000000003 = {
+          box_height = 0.0;
+          box_width = 0.0;
+          cx = 1280.0;
+          cy = 902.0;
+          output = "DP-1";
+          placement_height = 1080.0;
+          placement_width = 2560.0;
+          rotation = 0.0;
+          settings.background = false;
+          type = "fancy_audio_visualizer";
+        };
+        desktop-widget-0000000000000004 = {
+          box_height = 0.0;
+          box_width = 0.0;
+          cx = 1280.0;
+          cy = 300.0;
+          output = "DP-1";
+          placement_height = 1080.0;
+          placement_width = 2560.0;
+          rotation = 0.0;
+          type = "media_player";
+        };
+      };
+      widget_order = [
+        "desktop-widget-0000000000000001"
+        "desktop-widget-0000000000000002"
+        "desktop-widget-0000000000000003"
+        "desktop-widget-0000000000000004"
+      ];
+    };
     dock.colorize_icons = true;
     location.auto_locate = true;
     lockscreen_widgets = {
@@ -111,7 +172,10 @@ let
       widget_order = [ "lockscreen-login-box@WL-1" "lockscreen-login-box@DP-1" ];
     };
     notification.colorize_icons = true;
-    plugin_settings."dmopp/settings-to-nix".target_path = "/etc/nixos/modules/desktop/noctalia_settings.nix";
+    plugin_settings = {
+      "dmopp/settings-to-nix".target_path = "/etc/nixos/modules/desktop/noctalia_settings.nix";
+      "noctalia/bitwarden".server_url = "https://passwords.meihapps.gay";
+    };
     plugins.enabled = [
       "noctalia/umbriel-companion"
       "thaer99ob/default-apps"
@@ -125,6 +189,7 @@ let
       "avivbintangaringga/nix-monitor"
       "rylos/tailnet"
       "dmopp/settings-to-nix"
+      "asj/task-warrior"
     ];
     shell = {
       button_borders = false;

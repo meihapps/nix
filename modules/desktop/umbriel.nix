@@ -19,6 +19,7 @@
           natural_scroll = true;
         };
       };
+      layout.mode = "dwindle";
       keybinds."Mod+Return" = {
         action = "spawn ghostty";
         repeat = false;
