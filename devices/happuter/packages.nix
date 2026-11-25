@@ -16,6 +16,7 @@ in
   environment.systemPackages = with pkgs; [
     inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.autoclicke-rs.packages.${pkgs.stdenv.hostPlatform.system}.default
+    glfw3-minecraft
     librepods
     jdk21
     obsidian
