@@ -11,6 +11,7 @@
 
   environment.systemPackages = with pkgs; [
     claude-code
+    google-chrome
     jujutsu
   ];
 
